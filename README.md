@@ -6,6 +6,8 @@
 
 * What is this? This package allows you to use [Cypress](https://www.cypress.io/) test runner to unit test your React components with zero effort.
 
+* How is this different from [Enzyme](https://github.com/airbnb/enzyme)? It is similar in functionality BUT runs the component in the real browser with full power of Cypress E2E test runner: [live GUI, full API, screen recording, CI support, cross-platform](https://www.cypress.io/features/).
+
 ## Known problems
 
 - [ ] some DOM events are not working when running all tests at once [#4](https://github.com/bahmutov/cypress-react-unit-test/issues/4)
