@@ -34,6 +34,64 @@ describe('HelloState component', () => {
 
 ![Unit testing React components](images/demo.png)
 
+## Transpilation
+
+How can we use features that require transpilation? Using [@cypress/webpack-preprocessor](https://github.com/cypress-io/cypress-webpack-preprocessor#readme). You can use [cypress/plugins/index.js](cypress/plugins/index.js) to configure any transpilation plugins you need.
+
+For example, to enable class properties:
+
+```js
+// cypress/plugins/index.js
+const webpack = require('@cypress/webpack-preprocessor')
+const webpackOptions = {
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|mjs)$/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['env', 'react'],
+          plugins: ['transform-class-properties'],
+        },
+      }
+    ]
+  }
+}
+
+const options = {
+  // send in the options from your webpack.config.js, so it works the same
+  // as your app's code
+  webpackOptions,
+  watchOptions: {}
+}
+
+module.exports = on => {
+  on('file:preprocessor', webpack(options))
+}
+```
+
+Install dev dependencies
+
+```shell
+npm i -D @cypress/webpack-preprocessor \
+  babel-loader babel-preset-es2015 babel-preset-react \
+  babel-plugin-transform-class-properties
+```
+
+And write a component using class properties
+
+```js
+import React from 'react'
+
+export class Transpiled extends React.Component {
+  state = {
+    count: 0
+  }
+
+  // ...
+}
+```
+
 ## Examples
 
 All components are in [src](src) folder. All tests are in [cypress/integration](cypress/integration) folder.
