@@ -1,3 +1,4 @@
+import { stylesCache, setXMLHttpRequest, setAlert } from '../../lib'
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -63,14 +64,12 @@ Cypress.Commands.add('injectReactDOM', () => {
     })
 })
 
-// having weak reference to styles prevents garbage collection
-// and "losing" styles when the next test starts
-stylesCache = new Map()
+cy.stylesCache = stylesCache
 /** Caches styles from previously compiled components for reuse
     @function   cy.copyComponentStyles
     @param      {Object}  component
 **/
-Cypress.Commands.add('copyComponentStyles', function (component) {
+Cypress.Commands.add('copyComponentStyles', (component) => {
   // need to find same component when component is recompiled
   // by the JSX preprocessor. Thus have to use something else,
   // like component name
@@ -78,12 +77,12 @@ Cypress.Commands.add('copyComponentStyles', function (component) {
   const document = cy.state('document')
   let styles = document.querySelectorAll('head style')
   if (styles.length) {
-    console.log('injected %d styles', styles.length)
-    stylesCache.set(hash, styles)
+    cy.log('injected %d styles', styles.length)
+    cy.stylesCache.set(hash, styles)
   } else {
-    console.log('No styles injected for this component, checking cache')
-    if (stylesCache.has(hash)) {
-      styles = stylesCache.get(hash)
+    cy.log('No styles injected for this component, checking cache')
+    if (cy.stylesCache.has(hash)) {
+      styles = cy.stylesCache.get(hash)
     } else {
       styles = null
     }
@@ -109,13 +108,15 @@ Cypress.Commands.add('copyComponentStyles', function (component) {
     @param      {Object}  jsx
     @param      {string}  [Component]   alias
 **/
-Cypress.Commands.add('mount', function (jsx, alias) {
-  if (alias === void 0) { alias = 'Component'; }
+Cypress.Commands.add('mount', (jsx, alias = 'Component') => {
   cy
     .injectReactDOM()
     .log('ReactDOM.render(<' + alias + ' ... />)')
     .window({ log: false })
-    .then({ ReactDOM } => {
+    .then(setXMLHttpRequest)
+    .then(setAlert)
+    .then(win => {
+      const { ReactDOM } = win
       const document = cy.state('document')
       const component = ReactDOM.render(jsx, document.getElementById('cypress-jsdom'))
       cy.wrap(component, { log: false }).as(alias)
