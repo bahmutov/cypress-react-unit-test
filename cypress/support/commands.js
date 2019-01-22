@@ -78,7 +78,6 @@ Cypress.Commands.add('copyComponentStyles', (component) => {
     return
   }
   const parentDocument = window.parent.document
-  // // tslint:disable-next-line interface-name
   const projectName = Cypress.config('projectName')
   const appIframeId = "Your App: '" + projectName + "'"
   const appIframe = parentDocument.getElementById(appIframeId)
