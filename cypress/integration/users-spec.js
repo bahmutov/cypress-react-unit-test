@@ -1,6 +1,5 @@
 import { Users } from '../../src/users.jsx'
 import React from 'react'
-// import { cy.mount } from '../../lib'
 
 /* eslint-env mocha */
 context('Users', () => {

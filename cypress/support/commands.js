@@ -41,19 +41,6 @@ Cypress.Commands.add('injectReactDOM', () => {
       // when it runs the second time
       // https://github.com/bahmutov/cypress-react-unit-test/issues/3
       var html = `<body>
-          <style>
-          html {
-            width: 100vw;
-            height: 100vh;
-            padding: 20px;
-          }
-          #cypress-jsdom {
-            margin: auto;
-            padding: 30px 15px;
-            background-color: rgb(238, 238, 238);
-            overflow: auto;
-          }
-          </style>
           <div id="cypress-jsdom"></div>
           <script>${packages.React}</script>
           <script>${packages.ReactDOM}</script>

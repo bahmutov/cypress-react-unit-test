@@ -28,18 +28,18 @@ npm install --save-dev cypress cypress-react-unit-test
 // import the component you want to test
 import { HelloState } from '../../src/hello-x.jsx'
 import React from 'react'
-import { mount } from 'cypress-react-unit-test'
 describe('HelloState component', () => {
   it('works', () => {
     // mount the component under test
-    mount(<HelloState />)
+    cy.mount(<HelloState />)
     // start testing!
     cy.contains('Hello Spider-man!')
-    // mounted component is returned from Cypress.component()
-    Cypress.component().invoke('setState', {name: 'React'})
-    Cypress.component().its('state').should('deep.equal', {
-      name: 'React'
-    })
+    // mounted component is aliased as @Component
+    cy.get('@Component')
+      .invoke('setState', { name: 'React' })
+    cy.get('@Component')
+      .its('state')
+      .should('deep.equal', { name: 'React' })
     // check if GUI has rerendered
     cy.contains('Hello React!')
   })
