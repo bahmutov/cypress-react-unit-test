@@ -1,0 +1,9 @@
+ {
+  "modules": {
+    "react": "node_modules/react/umd/react.development.js",
+    "react-dom": "node_modules/react-dom/umd/react-dom.development.js"
+  },
+  "cdns": {
+    "lodash": "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"
+  }
+}

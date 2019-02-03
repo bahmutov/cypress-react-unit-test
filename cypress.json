@@ -2,9 +2,5 @@
   "viewportWidth": 300,
   "viewportHeight": 100,
   "video": false,
-  "projectId": "z9dxah",
-  "modules": {
-    "react": "node_modules/react/umd/react.development.js",
-    "react-dom": "node_modules/react-dom/umd/react-dom.development.js"
-  }
+  "projectId": "z9dxah"
 }

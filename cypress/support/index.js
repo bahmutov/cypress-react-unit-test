@@ -21,16 +21,27 @@ import './commands'
 
 /*
 Before All
-- Add modules specified in cypress.json
+- Cache CDN resource links
+- Load and cache "modules" specified in cypress.json
   (These should be in UMD format if you're inlining them as scripts)
 */
+
 before(() => {
-  cy.modules = {}
-  let modules = Cypress.config('modules')
-  cy.log('Loading modules', modules)
-  cy.readFile('node_modules/react/umd/react.development.js', { log: false })
-    .then(file => cy.modules.React = file)
-  cy.readFile('node_modules/react-dom/umd/react-dom.development.js', { log: false })
-    .then(file => cy.modules.ReactDOM = file)
-  console.warn('UMD Modules Loaded')
+  Cypress.cdns = {}
+  Cypress.modules = {}
+  cy
+    .log('Setting up CDN references and UMD modules')
+    .fixture('scripts')
+    .then((scripts = {}) => {
+      const { cdns, modules } = scripts
+      Object.keys(cdns).forEach(key => {
+        cy.log(`Referencing ${key} via ${cdns[key]}`)
+        Cypress.cdns[key] = cdns[key]
+      })
+      Object.keys(modules).forEach(key => {
+        cy.log(`Loading ${key}`)
+          .readFile(modules[key], { log: false })
+          .then(file => Cypress.modules[key] = file)
+      })
+    })
 })
