@@ -29,12 +29,8 @@ import { stylesCache, setXMLHttpRequest, setAlert } from '../../lib'
     @function   cy.injectReactDOM
 **/
 Cypress.Commands.add('injectReactDOM', () => {
-  var packages = {}
-  // Yeah, due to how Cy resolves promises under the hood, a closure works but an @aliased cached asset doesn't
   return cy
     .log('Injecting ReactDOM for Unit Testing')
-    .readFile('node_modules/react/umd/react.development.js', { log: false }).then(file => packages.React = file)
-    .readFile('node_modules/react-dom/umd/react-dom.development.js', { log: false }).then(file => packages.ReactDOM = file)
     .then(() => {
       // include React and ReactDOM to force DOM to register all DOM event listeners
       // otherwise the component will NOT be able to dispatch any events
@@ -42,8 +38,8 @@ Cypress.Commands.add('injectReactDOM', () => {
       // https://github.com/bahmutov/cypress-react-unit-test/issues/3
       var html = `<body>
           <div id="cypress-jsdom"></div>
-          <script>${packages.React}</script>
-          <script>${packages.ReactDOM}</script>
+          <script>${cy.modules.React}</script>
+          <script>${cy.modules.ReactDOM}</script>
         </body>`
       const document = cy.state('document')
       document.write(html)

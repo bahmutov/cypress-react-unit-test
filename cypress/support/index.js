@@ -18,3 +18,19 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+/*
+Before All
+- Add modules specified in cypress.json
+  (These should be in UMD format if you're inlining them as scripts)
+*/
+before(() => {
+  cy.modules = {}
+  let modules = Cypress.config('modules')
+  cy.log('Loading modules', modules)
+  cy.readFile('node_modules/react/umd/react.development.js', { log: false })
+    .then(file => cy.modules.React = file)
+  cy.readFile('node_modules/react-dom/umd/react-dom.development.js', { log: false })
+    .then(file => cy.modules.ReactDOM = file)
+  console.warn('UMD Modules Loaded')
+})
