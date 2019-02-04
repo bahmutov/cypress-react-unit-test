@@ -14,9 +14,9 @@ describe('HelloState component', () => {
     cy.mount(<HelloState />)
     cy.contains('Hello Spider-man!')
     const stateToSet = { name: 'React' }
-    cy.get('@HelloState')
+    cy.get(HelloState)
       .invoke('setState', stateToSet)
-    cy.get('@HelloState')
+    cy.get(HelloState)
       .its('state')
       .should('deep.equal', stateToSet)
     cy.contains('Hello React!')

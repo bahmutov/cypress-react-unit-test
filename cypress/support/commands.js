@@ -1,4 +1,5 @@
 import { stylesCache, setXMLHttpRequest, setAlert } from '../../lib'
+import { Component } from 'react'
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -109,4 +110,30 @@ Cypress.Commands.add('mount', (jsx, alias) => {
       cy.wrap(component, { log: false }).as(displayname)
     })
   cy.copyComponentStyles(jsx)
+})
+
+/** Get one or more DOM elements by selector or alias.
+    Features extended support for JSX and React.Component
+    @function   cy.get
+    @param      {string|object|function}  selector
+    @param      {object}                  options
+    @example    cy.get('@Component')
+    @example    cy.get(<Component />)
+    @example    cy.get(Component)
+**/
+Cypress.Commands.overwrite('get', (originalFn, selector, options) => {
+  switch (typeof selector) {
+    case 'object':
+      // If attempting to use JSX as a selector, reference the displayname
+      if (selector.$$typeof && selector.$$typeof.toString().startsWith('Symbol(react')) {
+        const displayname = selector.type.prototype.constructor.name
+        return originalFn(`@${displayname}`, options)
+      }
+    case 'function':
+      // If attempting to use the component name without JSX (testing in .js/.ts files)
+      const displayname = selector.prototype.constructor.name
+      return originalFn(`@${displayname}`, options)
+    default:
+      return originalFn(selector, options)
+  }
 })
