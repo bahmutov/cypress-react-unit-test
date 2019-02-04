@@ -32,20 +32,16 @@ Cypress.Commands.add('injectReactDOM', () => {
   return cy
     .log('Injecting ReactDOM for Unit Testing')
     .then(() => {
-      // Generate script tags for CDN resources 
-      const cdnScripts = Object.keys(Cypress.cdns)
-        .map(key => `<script src="${Cypress.cdns[key]}"></script>`)
-      // Generate inline scripts for UMD modules
-      const moduleScripts = Object.keys(Cypress.modules)
-        .map(key => `<script>${Cypress.modules[key]}</script>`)
+      // Generate inline script tags for UMD modules
+      const scripts = Cypress.modules
+        .map(module => `<script>${module.source}</script>`)
       // include React and ReactDOM to force DOM to register all DOM event listeners
       // otherwise the component will NOT be able to dispatch any events
       // when it runs the second time
       // https://github.com/bahmutov/cypress-react-unit-test/issues/3
       var html = `<body>
           <div id="cypress-jsdom"></div>
-          ${cdnScripts}
-          ${moduleScripts}
+          ${scripts}
         </body>`
       const document = cy.state('document')
       document.write(html)

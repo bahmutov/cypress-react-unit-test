@@ -1,3 +1,24 @@
+/*
+Before All
+- Load and cache UMD modules specified in fixtures/modules.json
+  These scripts are inlined in the document during unit tests
+  modules.json should be an array, which implicitly sets the loading order
+  Format: [{name, type, location}, ...]
+*/
+before(() => {
+  Cypress.modules = []
+  cy.log('Initializing UMD module cache')
+    .fixture('modules')
+    .then((modules = []) => {
+      for (const module of modules) {
+        let { name, type, location } = module
+        cy.log(`Loading ${name} via ${type}`)
+          .readFile(location)
+          .then(source => Cypress.modules.push({ name, type, location, source }))
+      }
+    })
+})
+
 // ***********************************************************
 // This example support/index.js is processed and
 // loaded automatically before your test files.
@@ -18,30 +39,3 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-
-/*
-Before All
-- Cache CDN resource links
-- Load and cache "modules" specified in cypress.json
-  (These should be in UMD format if you're inlining them as scripts)
-*/
-
-before(() => {
-  Cypress.cdns = {}
-  Cypress.modules = {}
-  cy
-    .log('Setting up CDN references and UMD modules')
-    .fixture('scripts')
-    .then((scripts = {}) => {
-      const { cdns, modules } = scripts
-      Object.keys(cdns).forEach(key => {
-        cy.log(`Referencing ${key} via ${cdns[key]}`)
-        Cypress.cdns[key] = cdns[key]
-      })
-      Object.keys(modules).forEach(key => {
-        cy.log(`Loading ${key}`)
-          .readFile(modules[key], { log: false })
-          .then(file => Cypress.modules[key] = file)
-      })
-    })
-})
