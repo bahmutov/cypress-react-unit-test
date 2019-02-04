@@ -35,6 +35,7 @@ Cypress.Commands.add('injectReactDOM', () => {
       // Generate inline script tags for UMD modules
       const scripts = Cypress.modules
         .map(module => `<script>${module.source}</script>`)
+        .join('')
       // include React and ReactDOM to force DOM to register all DOM event listeners
       // otherwise the component will NOT be able to dispatch any events
       // when it runs the second time
@@ -92,10 +93,12 @@ Cypress.Commands.add('copyComponentStyles', (component) => {
     @param      {Object}  jsx
     @param      {string}  [Component]   alias
 **/
-Cypress.Commands.add('mount', (jsx, alias = 'Component') => {
+Cypress.Commands.add('mount', (jsx, alias) => {
+  // Get the displayname property via the component constructor
+  const displayname = alias || jsx.type.prototype.constructor.name
   cy
     .injectReactDOM()
-    .log('ReactDOM.render(<' + alias + ' ... />)')
+    .log(`ReactDOM.render(<${displayname} ... />)`, jsx.props)
     .window({ log: false })
     .then(setXMLHttpRequest)
     .then(setAlert)
@@ -103,7 +106,7 @@ Cypress.Commands.add('mount', (jsx, alias = 'Component') => {
       const { ReactDOM } = win
       const document = cy.state('document')
       const component = ReactDOM.render(jsx, document.getElementById('cypress-jsdom'))
-      cy.wrap(component, { log: false }).as(alias)
+      cy.wrap(component, { log: false }).as(displayname)
     })
   cy.copyComponentStyles(jsx)
 })
