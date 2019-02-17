@@ -1,5 +1,4 @@
 import { stylesCache, setXMLHttpRequest, setAlert } from '../../lib'
-import { Component } from 'react'
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
