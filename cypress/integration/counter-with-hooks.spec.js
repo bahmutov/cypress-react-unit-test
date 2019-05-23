@@ -6,7 +6,7 @@ import CounterWithHooks from '../../src/counter-with-hooks.jsx'
 
 /* eslint-env mocha */
 describe('CounterWithHooks component', function () {
-  it('works', function () {
+  it.skip('works', function () {
     cy.mount(<CounterWithHooks initialCount={3} />)
     cy.contains('3')
   })
