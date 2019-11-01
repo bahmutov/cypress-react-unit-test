@@ -6,6 +6,9 @@ const webpackOptions = {
   node: {
     fs: 'empty'
   },
+  resolve: {
+    extensions: ['.jsx', '.tsx', '.js', '.ts']
+  },
   module: {
     rules: [
       {
