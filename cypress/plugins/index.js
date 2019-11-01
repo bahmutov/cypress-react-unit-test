@@ -17,6 +17,10 @@ const webpackOptions = {
         }
       },
       {
+        test: /\.(ts|tsx)$/,
+        loader: ['babel-loader', 'awesome-typescript-loader']
+      },
+      {
         test: /\.css$/,
         exclude: [/node_modules/],
         use: ['style-loader', 'css-loader']

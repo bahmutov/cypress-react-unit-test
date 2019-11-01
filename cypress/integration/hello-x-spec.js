@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 /// <reference types="../../lib" />
-import { HelloX, HelloState } from '../../src/hello-x.jsx'
+import { HelloX, HelloState } from '../../src/hello-x.tsx'
 import React from 'react'
 
 /* eslint-env mocha */
