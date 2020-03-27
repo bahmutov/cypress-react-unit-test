@@ -19,6 +19,11 @@ interface JSX extends Function {
   displayName: string
 }
 
+interface JSXElement {
+  type: JSX
+  props: object
+}
+
 declare namespace Cypress {
   interface Cypress {
     stylesCache: any
@@ -33,7 +38,7 @@ declare namespace Cypress {
   interface Chainable<Subject> {
     state: (key: any) => any,
     injectReactDOM: () => Chainable<void>
-    copyComponentStyles: (component: Symbol) => Chainable<void>
+    copyComponentStyles: (component: JSXElement) => Chainable<void>
     /**
      * Mount a React component in a blank document; register it as an alias
      * To access: use an alias or original component reference
@@ -53,7 +58,7 @@ declare namespace Cypress {
     cy.get(Hello)
     ```
     **/
-    mount: (component: Symbol, alias?: string) => Chainable<void>
+    mount: (component: JSXElement, alias?: string) => Chainable<void>
     get<S = any>(alias: string | symbol | Function, options?: Partial<Loggable & Timeoutable>): Chainable<any>
   }
 }

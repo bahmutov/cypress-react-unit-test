@@ -106,7 +106,7 @@ Cypress.Commands.add('copyComponentStyles', component => {
  cy.get(Hello)
  ```
  **/
-export const mount = (jsx: JSX, alias?: string) => {
+export const mount = (jsx: JSXElement, alias?: string) => {
   // Get the display name property via the component constructor
   const displayname = getDisplayName(jsx.type, alias)
 
