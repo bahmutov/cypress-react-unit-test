@@ -66,7 +66,7 @@ Cypress.Commands.add('copyComponentStyles', component => {
   const appDocument: Element = parentDocument.querySelector('iframe.aut-iframe').contentDocument
 
   const hash = component.type.name
-  let styles = specDocument.querySelectorAll('head style')
+  let styles: NodeListOf<Element> | null = specDocument.querySelectorAll('head style')
   if (styles.length) {
     cy.log(`injected ${styles.length} style(s)`)
     Cypress.stylesCache.set(hash, styles)
@@ -81,7 +81,7 @@ Cypress.Commands.add('copyComponentStyles', component => {
   if (!styles) {
     return
   }
-  const head = appDocument.querySelector('head')
+  const head = appDocument.querySelector('head')!
   styles.forEach(function (style) {
     head.appendChild(style)
   })
