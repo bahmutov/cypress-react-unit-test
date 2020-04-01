@@ -16,7 +16,7 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 6 or above.
+Requires [Node](https://nodejs.org/en/) version 8 or above.
 
 ```sh
 npm install --save-dev cypress cypress-react-unit-test
