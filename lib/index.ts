@@ -1,4 +1,4 @@
-/// <reference path="./index.d.ts" />JSX
+/// <reference path="./index.d.ts" />
 
 import getDisplayName from './getDisplayName';
 
