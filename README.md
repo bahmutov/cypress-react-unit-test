@@ -80,7 +80,7 @@ If your React and React DOM libraries are installed in non-standard paths (think
 
 ## Transpilation
 
-How can we use features that require transpilation? Using [@cypress/webpack-preprocessor](https://github.com/cypress-io/cypress-webpack-preprocessor#readme). You can use [cypress/plugins/index.js](cypress/plugins/index.js) to configure any transpilation plugins you need.
+How can we use features that require transpilation? By using [@cypress/webpack-preprocessor](https://github.com/cypress-io/cypress-webpack-preprocessor#readme). You can use [cypress/plugins/index.js](cypress/plugins/index.js) to configure any transpilation plugins you need.
 
 For example, to enable class properties:
 
