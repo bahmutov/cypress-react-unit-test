@@ -31,6 +31,21 @@ workflows:
           no-workspace: true
           record: false
 
+      - cypress/run:
+          name: Split test
+          parallelism: 4
+          requires:
+            - Install
+          # notice a trick to avoid re-installing dependencies
+          # in this job - a do-nothing "install-command" parameter
+          install-command: echo 'Nothing to install in this job'
+          # we are not going to use results from this job anywhere else
+          no-workspace: true
+          record: false
+          command: |
+            TESTFILES=$(circleci tests glob cypress/integration/**/*spec.* | circleci tests split --total=4)
+            echo "Test files for this machine are $TESTFILES"
+
       # this job attaches the workspace left by the install job
       # so it is ready to run Cypress tests
       # only we will run semantic release script instead
