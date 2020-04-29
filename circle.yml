@@ -20,20 +20,20 @@ workflows:
 
       # the test job automatically attaches the workspace
       # created by the install job, so it is ready to test
-      - cypress/run:
-          name: Test
-          requires:
-            - Install
-          # notice a trick to avoid re-installing dependencies
-          # in this job - a do-nothing "install-command" parameter
-          install-command: echo 'Nothing to install in this job'
-          # we are not going to use results from this job anywhere else
-          no-workspace: true
-          record: false
+      # - cypress/run:
+      #     name: Test
+      #     requires:
+      #       - Install
+      #     # notice a trick to avoid re-installing dependencies
+      #     # in this job - a do-nothing "install-command" parameter
+      #     install-command: echo 'Nothing to install in this job'
+      #     # we are not going to use results from this job anywhere else
+      #     no-workspace: true
+      #     record: false
 
       - cypress/run:
           name: Split test
-          parallelism: 4
+          parallelism: 2
           requires:
             - Install
           # notice a trick to avoid re-installing dependencies
