@@ -34,8 +34,8 @@ workflows:
       - cypress/run:
           name: Split test
           parallelism: 2
-          # requires:
-          #   - Install
+          requires:
+            - Install
           # notice a trick to avoid re-installing dependencies
           # in this job - a do-nothing "install-command" parameter
           install-command: echo 'Nothing to install in this job'
