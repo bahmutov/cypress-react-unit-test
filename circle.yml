@@ -45,25 +45,24 @@ workflows:
           command: |
             TESTFILES=$(circleci tests glob cypress/integration/**/*spec.* | circleci tests split --total=4)
             echo "Test files for this machine are $TESTFILES"
-
       # this job attaches the workspace left by the install job
       # so it is ready to run Cypress tests
       # only we will run semantic release script instead
-      - cypress/run:
-          name: NPM release
-          # we need newer Node for semantic release
-          executor: cypress/base-12-6-0
-          requires:
-            - Install
-            - Test
-          install-command: echo 'Nothing to install in this job'
-          no-workspace: true
-          # instead of "cypress run" do NPM release 😁
-          # clear environment variables to trick semantic-release
-          # into thinking this is NOT a pull request.
-          # (under the hood the module env-ci is used to check if this is a PR)
-          command: |
-            CIRCLE_PR_NUMBER= \
-            CIRCLE_PULL_REQUEST= \
-            CI_PULL_REQUEST= \
-            npm run semantic-release
+      # - cypress/run:
+      #     name: NPM release
+      #     # we need newer Node for semantic release
+      #     executor: cypress/base-12-6-0
+      #     requires:
+      #       - Install
+      #       - Test
+      #     install-command: echo 'Nothing to install in this job'
+      #     no-workspace: true
+      #     # instead of "cypress run" do NPM release 😁
+      #     # clear environment variables to trick semantic-release
+      #     # into thinking this is NOT a pull request.
+      #     # (under the hood the module env-ci is used to check if this is a PR)
+      #     command: |
+      #       CIRCLE_PR_NUMBER= \
+      #       CIRCLE_PULL_REQUEST= \
+      #       CI_PULL_REQUEST= \
+      #       npm run semantic-release
