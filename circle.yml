@@ -34,7 +34,7 @@ workflows:
           command: |
             TESTFILES=$(circleci tests glob "cypress/{component,integration}/**/*spec.{js,jsx,ts,tsx}" | circleci tests split --total=2)
             echo "Test files for this machine are $TESTFILES"
-            cypress run --spec $TESTFILES
+            npx cypress run --spec $TESTFILES
 
       # this job attaches the workspace left by the install job
       # so it is ready to run Cypress tests
