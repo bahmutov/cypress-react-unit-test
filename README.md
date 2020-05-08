@@ -2,6 +2,8 @@
 
 > A little helper to unit test React components in the open source [Cypress.io](https://www.cypress.io/) E2E test runner **v4.5.0+**
 
+**Jump to:** [Comparison](#comparison), [Install](#install), Examples: [basic](#basic-examples), [advanced](#advanced-examples), [full](#full-examples), [external](#external-examples), [Options](#options), [Code coverage](#code-coverage), [Visual testing](#visual-testing), [Commoon problems](#common-problems)
+
 ## TLDR
 
 - What is this? This package allows you to use [Cypress](https://www.cypress.io/) test runner to unit test your React components with zero effort. Here is a typical component testing, notice there is not external URL shown, since it is mounting the component directly.
