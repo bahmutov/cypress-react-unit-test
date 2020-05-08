@@ -143,7 +143,18 @@ Spec | Description
 [react-bootstrap](cypress/component/advanced/react-bootstrap) | Confirms [react-bootstrap](https://react-bootstrap.github.io/) components are working
 <!-- prettier-ignore-end -->
 
-### Large examples
+### Full examples
+
+We have several subfolders in [examples](examples) folder that have complete projects with just their dependencies installed in the root folder.
+
+<!-- prettier-ignore-start -->
+Folder Name | Description
+--- | ---
+[react-scripts](examples/react-scripts) | A project using `react-scripts` with component tests in `src` folder
+[react-scripts-folder](examples/react-scripts-folder) | A project using `react-scripts` with component tests in `cypress/component`
+<!-- prettier-ignore-end -->
+
+### External examples
 
 This way of component testing has been verified in a number of forked 3rd party projects.
 
