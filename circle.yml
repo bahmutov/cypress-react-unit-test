@@ -28,6 +28,7 @@ workflows:
           install-command: echo 'Nothing to install'
           no-workspace: true
           working_directory: examples/react-scripts
+          command: npm test
 
       - cypress/run:
           name: Test
