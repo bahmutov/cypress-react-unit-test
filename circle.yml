@@ -25,7 +25,8 @@ workflows:
           name: Example React Scripts
           requires:
             - Install
-          install-command: echo 'Already installed'
+          # each example installs "cypress-react-unit-test" as a local dependency (symlink)
+          install-command: npm install
           verify-command: echo 'Already verified'
           no-workspace: true
           working_directory: examples/react-scripts
