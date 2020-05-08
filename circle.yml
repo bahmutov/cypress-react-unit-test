@@ -32,23 +32,23 @@ workflows:
           working_directory: examples/react-scripts
           command: npm test
 
-      # - cypress/run:
-      #     name: Test
-      #     parallelism: 4
-      #     requires:
-      #       - Install
-      #     # notice a trick to avoid re-installing dependencies
-      #     # in this job - a do-nothing "install-command" parameter
-      #     install-command: echo 'Nothing to install in this job'
-      #     # we are not going to use results from this job anywhere else
-      #     no-workspace: true
-      #     record: false
-      #     # following examples from
-      #     # https://circleci.com/docs/2.0/parallelism-faster-jobs/
-      #     command: |
-      #       TESTFILES=$(circleci tests glob "cypress/{component,integration}/**/*spec.{js,jsx,ts,tsx}" | circleci tests split --total=4)
-      #       echo "Test files for this machine are $TESTFILES"
-      #       npx cypress run --spec $TESTFILES
+      - cypress/run:
+          name: Test
+          parallelism: 4
+          requires:
+            - Install
+          # notice a trick to avoid re-installing dependencies
+          # in this job - a do-nothing "install-command" parameter
+          install-command: echo 'Nothing to install in this job'
+          # we are not going to use results from this job anywhere else
+          no-workspace: true
+          record: false
+          # following examples from
+          # https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          command: |
+            TESTFILES=$(circleci tests glob "cypress/{component,integration}/**/*spec.{js,jsx,ts,tsx}" | circleci tests split --total=4)
+            echo "Test files for this machine are $TESTFILES"
+            npx cypress run --spec $TESTFILES
 
       # this job attaches the workspace left by the install job
       # so it is ready to run Cypress tests
@@ -59,7 +59,7 @@ workflows:
           executor: cypress/base-12-6-0
           requires:
             - Install
-            # - Test
+            - Test
             - Example React Scripts
           install-command: echo 'Already installed'
           verify-command: echo 'Already verified'
