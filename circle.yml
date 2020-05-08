@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@1.21.0
 workflows:
   build:
     jobs:
@@ -25,7 +25,8 @@ workflows:
           name: Examples React Scripts
           requires:
             - Install
-          install-command: echo 'Nothing to install'
+          install-command: echo 'Already installed'
+          verify-command: echo 'Already verified'
           no-workspace: true
           working_directory: examples/react-scripts
           command: npm test
