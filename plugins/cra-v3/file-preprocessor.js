@@ -43,5 +43,7 @@ module.exports = config => {
     coverage: !coverageIsDisabled,
   }
   const options = getWebpackOptions(opts)
+  debug('final webpack options %o', options.webpackOptions)
+
   return webpackPreprocessor(options)
 }
