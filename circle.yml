@@ -22,6 +22,14 @@ workflows:
                 command: npm run build
 
       - cypress/run:
+          name: Examples React Scripts
+          requires:
+            - Install
+          install-command: echo 'Nothing to install'
+          no-workspace: true
+          working_directory: examples/react-scripts
+
+      - cypress/run:
           name: Test
           parallelism: 4
           requires:
