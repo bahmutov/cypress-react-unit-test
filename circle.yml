@@ -31,6 +31,7 @@ workflows:
           no-workspace: true
           working_directory: examples/react-scripts
           command: npm test
+          store_artifacts: true
 
       - cypress/run:
           name: Test
@@ -43,6 +44,7 @@ workflows:
           # we are not going to use results from this job anywhere else
           no-workspace: true
           record: false
+          store_artifacts: true
           # following examples from
           # https://circleci.com/docs/2.0/parallelism-faster-jobs/
           command: |
