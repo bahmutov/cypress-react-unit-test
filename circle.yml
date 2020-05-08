@@ -43,7 +43,7 @@ workflows:
           install-command: npm install
           verify-command: echo 'Already verified'
           no-workspace: true
-          working_directory: examples/react-scripts
+          working_directory: examples/react-scripts-folder
           command: npm test
           store_artifacts: true
 
