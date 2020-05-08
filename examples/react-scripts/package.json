@@ -1,0 +1,11 @@
+{
+  "name": "example-react-scripts",
+  "description": "Component testing with specs inside the src folder",
+  "private": true,
+  "scripts": {
+    "test": "../../node_modules/.bin/cypress run"
+  },
+  "devDependencies": {
+    "cypress-react-unit-test": "file:../.."
+  }
+}
