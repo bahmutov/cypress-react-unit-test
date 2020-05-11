@@ -18,4 +18,10 @@ cy.get('.MuiPickersBasePicker-container').should('be.visible')
 cy.percySnapshot('Datepicker opened')
 ```
 
+### New screenshot
+
+![Percy dashboard](images/new-image.png)
+
+### Visual change
+
 **Tip:** you can use any [visual testing](https://on.cypress.io/visual-testing) plugin with component testing.
