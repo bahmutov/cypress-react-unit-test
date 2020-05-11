@@ -72,7 +72,9 @@ workflows:
           verify-command: echo 'Already verified'
           no-workspace: true
           working_directory: examples/visual-testing
-          command: npm test
+          # run Percy agent and then run Cypress component tests
+          # https://docs.percy.io/docs/cypress
+          command: npx percy exec -- npm test
           store_artifacts: true
 
       - cypress/run:
