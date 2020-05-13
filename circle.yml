@@ -24,11 +24,6 @@ workflows:
 
       - cypress/run:
           name: Example React Scripts
-          # remove before merging
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - Install
           # each example installs "cypress-react-unit-test" as a local dependency (symlink)
@@ -43,11 +38,6 @@ workflows:
           # react-scripts example with component tests not in "src" folder
           # but in "cypress/component" folder
           name: Example Component Folder
-          # remove before merging
-          filters:
-            branches:
-              only:
-                - master
           executor: cypress/base-12
           requires:
             - Install
@@ -73,12 +63,7 @@ workflows:
           store_artifacts: true
 
       - cypress/run:
-          name: Example Visual Testing
-          # remove before merging
-          filters:
-            branches:
-              only:
-                - master
+          name: Visual with Percy
           executor: cypress/base-12
           requires:
             - Install
@@ -86,7 +71,7 @@ workflows:
           install-command: npm install
           verify-command: echo 'Already verified'
           no-workspace: true
-          working_directory: examples/visual-testing
+          working_directory: examples/visual-testing-with-percy
           # run Percy agent and then run Cypress component tests
           # https://docs.percy.io/docs/cypress
           command: npx percy exec -- npm test
@@ -107,11 +92,6 @@ workflows:
 
       - cypress/run:
           name: Test
-          # remove before merging
-          filters:
-            branches:
-              only:
-                - master
           executor: cypress/base-12
           parallelism: 4
           requires:
@@ -148,7 +128,7 @@ workflows:
             - Example React Scripts
             - Example Component Folder
             - Example Webpack options
-            - Example Visual Testing
+            - Visual with Percy
             - Visual with Happo
           install-command: echo 'Already installed'
           verify-command: echo 'Already verified'
