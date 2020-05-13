@@ -24,6 +24,11 @@ workflows:
 
       - cypress/run:
           name: Example React Scripts
+          # remove before merging
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - Install
           # each example installs "cypress-react-unit-test" as a local dependency (symlink)
@@ -38,6 +43,11 @@ workflows:
           # react-scripts example with component tests not in "src" folder
           # but in "cypress/component" folder
           name: Example Component Folder
+          # remove before merging
+          filters:
+            branches:
+              only:
+                - master
           executor: cypress/base-12
           requires:
             - Install
@@ -64,6 +74,11 @@ workflows:
 
       - cypress/run:
           name: Example Visual Testing
+          # remove before merging
+          filters:
+            branches:
+              only:
+                - master
           executor: cypress/base-12
           requires:
             - Install
@@ -92,6 +107,11 @@ workflows:
 
       - cypress/run:
           name: Test
+          # remove before merging
+          filters:
+            branches:
+              only:
+                - master
           executor: cypress/base-12
           parallelism: 4
           requires:
