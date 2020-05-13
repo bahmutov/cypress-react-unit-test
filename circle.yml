@@ -86,7 +86,7 @@ workflows:
           install-command: npm install
           verify-command: echo 'Already verified'
           no-workspace: true
-          working_directory: examples/visual-testing-using-happo
+          working_directory: examples/visual-testing-with-happo
           command: npm test
           store_artifacts: true
 
