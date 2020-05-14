@@ -117,6 +117,7 @@ describe('Calendar heatmap', () => {
       )
     })
     cy.contains('Cypress ❤️ 🦛').should('be.visible')
+    // now that UI has refreshed, take a snapshot
     cy.get('.react-calendar-heatmap').happoScreenshot({
       component: 'CalendarHeatmap',
       variant: 'heart',
