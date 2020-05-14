@@ -77,8 +77,8 @@ describe('Calendar heatmap', () => {
   })
 
   it('Cypress ❤️ 🦛', () => {
-    const startDate = '2019-11-01'
-    const endDate = '2020-05-01'
+    const startDate = '2019-10-27'
+    const endDate = '2020-05-03'
 
     const classForValue = value => {
       if (!value || !value.count) {
