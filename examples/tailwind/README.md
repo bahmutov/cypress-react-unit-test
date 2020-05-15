@@ -25,3 +25,9 @@ npm test
 - [src/App.cy-spec.js](src/App.cy-spec.js) tests component [src/App.js](src/App.js) that uses Tailwind style bundle `src/styles/main.generated.css`
 
 ![Tailwind test](./images/tailwind.png)
+
+- [src/playground.cy-spec.js](src/playground.cy-spec.js) imports the CSS directly and shows off different available classes, allowing you to experiment with them from the test
+
+![Playground](images/playground.png)
+
+Note: each test uses [cy.screenshot](https://on.cypress.io/screenshot) at the end to save an image to `cypress/screenshots` folder.

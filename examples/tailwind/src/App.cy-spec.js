@@ -16,5 +16,7 @@ describe('Tailwind App', () => {
     cy.get('button.rounded').should($el => {
       expect($el.css('border-radius')).to.match(/^\d+px$/)
     })
+
+    cy.screenshot()
   })
 })
