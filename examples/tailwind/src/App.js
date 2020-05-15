@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles/main.css'
+import './styles/main.generated.css'
 function App() {
   return (
     <div className="h-64">
