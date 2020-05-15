@@ -31,3 +31,7 @@ npm test
 ![Playground](images/playground.png)
 
 Note: each test uses [cy.screenshot](https://on.cypress.io/screenshot) at the end to save an image to `cypress/screenshots` folder.
+
+## See also
+
+When working with styles, we recommend [visual testing](https://on.cypress.io/visual-testing) using one of 3rd party [visual plugins](https://on.cypress.io/plugins#visual-testing). See a few visual testing examples in this repository.
