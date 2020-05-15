@@ -19,3 +19,9 @@ npm run cy:open
 # or just run headless tests
 npm test
 ```
+
+## Tests
+
+- [src/App.cy-spec.js](src/App.cy-spec.js) tests component [src/App.js](src/App.js) that uses Tailwind style bundle `src/styles/main.generated.css`
+
+![Tailwind test](./images/tailwind.png)
