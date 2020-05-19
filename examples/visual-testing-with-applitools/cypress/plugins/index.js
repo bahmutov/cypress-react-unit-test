@@ -5,3 +5,4 @@ module.exports = (on, config) => {
   // with the any changed environment variables
   return config
 }
+require('@applitools/eyes-cypress')(module)
