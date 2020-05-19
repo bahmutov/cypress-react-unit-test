@@ -10,10 +10,13 @@ describe('Chart', () => {
     cy.eyesOpen({
       appName: 'cypress-react-unit-test',
       testName: 'Chart example',
-      browser: {
-        width: Cypress.config('viewportWidth'),
-        height: Cypress.config('viewportHeight'),
-      },
+      browser: [
+        {
+          width: Cypress.config('viewportWidth'),
+          height: Cypress.config('viewportHeight'),
+          name: 'firefox',
+        },
+      ],
       // ignore "cy.eyes*" commands when using "cypress open"
       isDisabled: Cypress.config('isInteractive'),
     })
