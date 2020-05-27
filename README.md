@@ -299,6 +299,14 @@ Keep your eye on issue [#156](https://github.com/bahmutov/cypress-react-unit-tes
 
 </details>
 
+<details id="missing-code-coverage">
+
+If you are using your custom Webpack, this plugin might be missing code coverage information because the code was not instrumented. We try to insert the `babel-plugin-istanbul` plugin automatically, but your bundling might not use Babel, or configure it differently, preventing plugin insertion. Please let us know by opening an issue with full reproducible details.
+
+See related issue [#141](https://github.com/bahmutov/cypress-react-unit-test/issues/141).
+
+</details>
+
 ## Development
 
 See [docs/development.md](./docs/development.md)

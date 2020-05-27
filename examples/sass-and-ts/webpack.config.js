@@ -13,7 +13,11 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'],
-          plugins: ['@babel/plugin-proposal-class-properties'],
+          plugins: [
+            '@babel/plugin-proposal-class-properties',
+            // we want to instrument unit tests on the fly
+            'babel-plugin-istanbul',
+          ],
         },
       },
       {
