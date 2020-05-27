@@ -76,6 +76,13 @@ workflows:
           working_directory: examples/react-scripts-folder
           command: npm test
           store_artifacts: true
+          post-steps:
+            - run:
+                name: Check coverage 📈
+                command: |
+                  npm run check-coverage
+                  npm run only-covered
+                working_directory: examples/react-scripts-folder
 
       - cypress/run:
           name: Example Tailwind
