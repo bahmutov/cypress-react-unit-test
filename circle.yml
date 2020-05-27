@@ -99,6 +99,7 @@ workflows:
             - run:
                 name: Check coverage 📈
                 command: |
+                  ls -la
                   npm run check-coverage
                   npm run only-covered
                 working_directory: examples/tailwind
