@@ -115,6 +115,13 @@ workflows:
           working_directory: examples/webpack-options
           command: npm test
           store_artifacts: true
+          post-steps:
+            - run:
+                name: Check coverage 📈
+                command: |
+                  npm run check-coverage
+                  npm run only-covered
+                working_directory: examples/webpack-options
 
       - cypress/run:
           name: Example Sass
