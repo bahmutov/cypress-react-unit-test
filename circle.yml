@@ -54,6 +54,13 @@ workflows:
           working_directory: examples/react-scripts
           command: npm test
           store_artifacts: true
+          post-steps:
+            - run:
+                name: Check coverage 📈
+                command: |
+                  npm run check-coverage
+                  npm run only-covered
+                working_directory: examples/react-scripts
 
       - cypress/run:
           # react-scripts example with component tests not in "src" folder
