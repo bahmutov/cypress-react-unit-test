@@ -15,8 +15,10 @@ module.exports = {
           presets: ['@babel/preset-env', '@babel/preset-react'],
           plugins: [
             '@babel/plugin-proposal-class-properties',
-            // we want to instrument unit tests on the fly
-            'babel-plugin-istanbul',
+            // we want to instrument unit tests on the fly so we usually insert this plugin
+            // 'babel-plugin-istanbul',
+            // but cypress-react-unit-test inserts this plugin automatically
+            // if the code coverage is enabled, so you don't have to worry
           ],
         },
       },
