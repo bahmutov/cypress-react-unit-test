@@ -93,7 +93,8 @@ workflows:
           verify-command: echo 'Already verified'
           no-workspace: true
           working_directory: examples/tailwind
-          command: npm test
+          command: |
+            DEBUG=cypress-react-unit-test,find-webpack npm test
           store_artifacts: true
           post-steps:
             - run:
