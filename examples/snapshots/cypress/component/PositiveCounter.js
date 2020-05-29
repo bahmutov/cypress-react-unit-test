@@ -6,6 +6,10 @@ export default class PositiveCounter extends Component {
     this.state = {
       count: 0,
     }
+    // if we are running inside Cypress, expose the state
+    if (window.Cypress) {
+      window.PositiveCounter = this
+    }
   }
 
   increment = () => {

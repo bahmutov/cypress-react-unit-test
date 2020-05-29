@@ -37,4 +37,20 @@ describe('PositiveCounter', () => {
       .its('0.outerHTML')
       .toMatchSnapshot()
   })
+
+  it('snapshots the component state', () => {
+    mount(<PositiveCounter />)
+    cy.get('.increment')
+      .click()
+      .click()
+      .click()
+      .click()
+    // The component's code set its reference
+    // as a property on the "window" object
+    // when running inside Cypress. This allows
+    // the test to access it.
+    cy.window()
+      .its('PositiveCounter.state')
+      .toMatchSnapshot()
+  })
 })
