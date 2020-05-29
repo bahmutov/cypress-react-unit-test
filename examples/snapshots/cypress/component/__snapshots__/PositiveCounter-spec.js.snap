@@ -5,7 +5,7 @@ exports[`PositiveCounter > should render counts #0`] =
 
 exports[`PositiveCounter > should render counts #1`] =
 {
-  "html": "<span>Value: 5<button class=\"decrement\">−</button><button class=\"increment\">+</button></span>"
+  "html": "<span>Value: 6<button class=\"decrement\">−</button><button class=\"increment\">+</button></span>"
 };
 
 exports[`PositiveCounter > should not go negative #0`] =

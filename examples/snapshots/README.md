@@ -19,4 +19,6 @@ See [cypress/component/PositiveCounter-spec.js](cypress/component/PositiveCounte
 
 ## Failing test
 
-If the snapshot contents does not match the saved snapshot file, the test fails.
+If the snapshot contents does not match the saved snapshot file, the test fails. You can click on the snapshot command, review the difference, and if the difference is expected, update the snapshot from the Test Runner's GUI.
+
+![Update snapshot](images/update-snapshot.gif)

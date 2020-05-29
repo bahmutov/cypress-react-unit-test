@@ -49,8 +49,9 @@ describe('PositiveCounter', () => {
     cy.get('.increment')
       .click()
       .click()
+      .click()
 
-    cy.contains('Value: 5').toMatchHTML()
+    cy.contains('Value: 6').toMatchHTML()
   })
 
   it('should not go negative', () => {
