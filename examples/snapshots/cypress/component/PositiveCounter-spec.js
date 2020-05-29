@@ -3,7 +3,40 @@ import React from 'react'
 import { mount } from 'cypress-react-unit-test'
 import PositiveCounter from './PositiveCounter'
 
+// current version 1.4.3 of cypress-plugin-snapshots only works with
+// objects and images.
+// https://github.com/meinaart/cypress-plugin-snapshots/issues/122
+it.skip('sanity check: string snapshots work', () => {
+  cy.wrap('hello, world').toMatchSnapshot()
+})
+
+// utility child command that grabs element's HTML and snapshots its as an object
+Cypress.Commands.add('toMatchHTML', { prevSubject: 'element' }, $el => {
+  return cy
+    .wrap({
+      html: $el[0].outerHTML,
+    })
+    .toMatchSnapshot()
+})
+
 describe('PositiveCounter', () => {
+  it('starts with zero', () => {
+    mount(<PositiveCounter />)
+    cy.contains('Value: 0')
+      // previous command yields jQuery element
+      // I would like to get its outer HTML which
+      // we can do via $el[0].outerHTML shorthand
+      .its('0.outerHTML')
+      // convert text to JSON object for the snapshot plugin to work
+      // https://github.com/meinaart/cypress-plugin-snapshots/issues/122
+      .then(html => ({
+        html,
+      }))
+      .toMatchSnapshot()
+
+    // in other tests we will use utility child command .toMatchHTML()
+  })
+
   it('should render counts', () => {
     mount(<PositiveCounter />)
     cy.get('.increment')
@@ -11,20 +44,13 @@ describe('PositiveCounter', () => {
       .click()
       .click()
     // make sure the component updates
-    cy.contains('Value: 3')
-      // previous command yields jQuery element
-      // I would like to get its outer HTML which
-      // we can do via $el[0].outerHTML shorthand
-      .its('0.outerHTML')
-      .toMatchSnapshot()
+    cy.contains('Value: 3').toMatchHTML()
 
     cy.get('.increment')
       .click()
       .click()
 
-    cy.contains('Value: 5')
-      .its('0.outerHTML')
-      .toMatchSnapshot()
+    cy.contains('Value: 5').toMatchHTML()
   })
 
   it('should not go negative', () => {
@@ -33,9 +59,7 @@ describe('PositiveCounter', () => {
     cy.get('.decrement')
       .click()
       .click()
-    cy.contains('Value: 0')
-      .its('0.outerHTML')
-      .toMatchSnapshot()
+    cy.contains('Value: 0').toMatchHTML()
   })
 
   it('snapshots the component state', () => {
