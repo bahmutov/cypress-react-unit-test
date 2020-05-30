@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 import logo from './logo.svg' // => "/__root/src/logo.svg"
 import cypressLogo from './cypress-logo-dark.png' // => "/__root/src/cypress-logo-dark.png"
+import { getRandomNumber } from './calc'
 
 // large image will be transformed into
 // a different url static/media/vans.25e5784d.jpg
@@ -22,6 +23,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <p className="random">This is a random number {getRandomNumber()}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
