@@ -118,6 +118,26 @@ workflows:
                 working_directory: examples/tailwind
 
       - cypress/run:
+          name: Example Webpack file
+          executor: cypress/base-12
+          requires:
+            - Install
+          # each example installs "cypress-react-unit-test" as a local dependency (symlink)
+          install-command: npm install
+          verify-command: echo 'Already verified'
+          no-workspace: true
+          working_directory: examples/webpack-file
+          command: npm test
+          store_artifacts: true
+          post-steps:
+            - run:
+                name: Check coverage 📈
+                command: |
+                  npm run check-coverage
+                  npm run only-covered
+                working_directory: examples/webpack-file
+
+      - cypress/run:
           name: Example Webpack options
           executor: cypress/base-12
           requires:
@@ -271,6 +291,7 @@ workflows:
             - Example Sass
             - Example Snapshots
             - Example Tailwind
+            - Example Webpack file
             - Example Webpack options
             - Visual Sudoku
             - Visual with Percy
