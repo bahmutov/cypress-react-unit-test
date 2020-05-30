@@ -6,9 +6,8 @@ executors:
   base-12-16-2:
     docker:
       - image: 'cypress/base:12.16.2'
-
-environment:
-  DEBUG: find-webpack,cypress-react-unit-test
+    environment:
+      DEBUG: find-webpack,cypress-react-unit-test
 
 workflows:
   build:
@@ -122,7 +121,7 @@ workflows:
 
       - cypress/run:
           name: Example Webpack file
-          executor: cypress/base-12
+          executor: base-12-16-2
           requires:
             - Install
           # each example installs "cypress-react-unit-test" as a local dependency (symlink)
