@@ -7,9 +7,8 @@ import SideBySide from './SideBySide'
 import Post from './Post'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
-// matches Post.story.js
 describe('Post skeletons', () => {
-  it.only('mocks the es6 import', () => {
+  it('mocks the es6 import', () => {
     cy.stub(calc, 'getRandomNumber')
       .as('lucky')
       .returns(777)

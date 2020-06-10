@@ -27,3 +27,32 @@ module.exports = (on, config) => {
   return config
 }
 ```
+
+## Mocking
+
+During test runs, there is a Babel plugin that transforms ES6 imports into plain objects that can be stubbed using [cy.stub](https://on.cypress.io/stub). In essence
+
+```js
+// component imports named ES6 import from "calc.js
+import { getRandomNumber } from './calc'
+const Component = () => {
+  // then calls it
+  const n = getRandomNumber()
+  return <div className="random">{n}</div>
+}
+```
+
+The test can mock that import before mounting the component
+
+```js
+import Component from './Component.jsx'
+import * as calc from './calc'
+describe('Component', () => {
+  it('mocks call from the component', () => {
+    cy.stub(calc, 'getRandomNumber')
+      .as('lucky')
+      .returns(777)
+    mount(<Component />)
+  })
+})
+```
