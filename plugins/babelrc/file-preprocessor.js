@@ -3,7 +3,6 @@
 const debug = require('debug')('cypress-react-unit-test')
 const webpackPreprocessor = require('@cypress/webpack-preprocessor')
 const { addImageRedirect } = require('../utils/add-image-redirect')
-const babelCore = require('@babel/core')
 
 // note: modifies the input object
 function enableBabelrc(webpackOptions) {
@@ -43,7 +42,7 @@ function enableBabelrc(webpackOptions) {
 module.exports = config => {
   debug('env object %o', config.env)
 
-  const nodeEnvironment = 'development'
+  const nodeEnvironment = 'test'
   if (!process.env.BABEL_ENV) {
     debug('setting BABEL_ENV to %s', nodeEnvironment)
     process.env.BABEL_ENV = nodeEnvironment
@@ -52,6 +51,11 @@ module.exports = config => {
     debug('setting NODE_ENV to %s', nodeEnvironment)
     process.env.NODE_ENV = nodeEnvironment
   }
+
+  debug('environments %o', {
+    BABEL_ENV: process.env.BABEL_ENV,
+    NODE_ENV: process.env.NODE_ENV,
+  })
 
   const coverageIsDisabled =
     config && config.env && config.env.coverage === false
