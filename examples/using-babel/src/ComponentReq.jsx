@@ -7,4 +7,4 @@ const Component = () => {
   return <div className="random">{n}</div>
 }
 
-module.exports = Component
+export default Component
