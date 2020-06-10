@@ -42,6 +42,11 @@ function enableBabelrc(webpackOptions) {
 module.exports = config => {
   debug('env object %o', config.env)
 
+  debug('initial environments %o', {
+    BABEL_ENV: process.env.BABEL_ENV,
+    NODE_ENV: process.env.NODE_ENV,
+  })
+
   const nodeEnvironment = 'test'
   if (!process.env.BABEL_ENV) {
     debug('setting BABEL_ENV to %s', nodeEnvironment)
