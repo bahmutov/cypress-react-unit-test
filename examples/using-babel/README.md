@@ -14,7 +14,7 @@ npm test
 
 ## Specs
 
-See specs [src/Post.spec.js](src/Post.spec.js) and [src/Skeleton.spec.js](src/Skeleton.spec.js). The specs are bundled using [.babelrc](.babelrc) settings via [cypress/plugins/index.js](cypress/plugins/index.js) file that includes file preprocessor
+See spec files [src/\*.spec.js](src). The specs are bundled using [.babelrc](.babelrc) settings via [cypress/plugins/index.js](cypress/plugins/index.js) file that includes file preprocessor
 
 ```js
 // let's bundle spec files and the components they include using
