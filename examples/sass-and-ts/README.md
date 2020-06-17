@@ -4,7 +4,7 @@
 
 ![Sass test](images/sass.png)
 
-> Usage
+## Usage
 
 1. Make sure the root project has been built .
 
