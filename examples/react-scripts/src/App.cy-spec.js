@@ -32,4 +32,21 @@ describe('App', () => {
     mount(<App />)
     cy.contains('.mock-child', 'Mock Child')
   })
+
+  describe('loading .env variables', () => {
+    it('loads the REACT_APP_ variables from .env file', () => {
+      mount(<App />)
+      cy.contains('#env-var', 'Hello Component Tests!')
+    })
+
+    it('has NODE_ENV set', () => {
+      // TODO should be NODE_ENV=test
+      cy.wrap(process.env).should('have.property', 'NODE_ENV')
+    })
+
+    it.skip('merges env variables from .env files', () => {
+      // https://create-react-app.dev/docs/adding-custom-environment-variables/
+      cy.wrap(process.env).should('deep.equal', {})
+    })
+  })
 })
