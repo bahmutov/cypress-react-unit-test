@@ -228,7 +228,7 @@ workflows:
           # thus the job will always fail. Let's skip this job if the
           # environment variable is missing
           command: |
-            if [ -n "$APPLITOOLS_API_KEY_FOO" ]; then
+            if [ -z "$APPLITOOLS_API_KEY_FOO" ]; then
               echo "Skipping Applitools test job, missing environment variable APPLITOOLS_API_KEY"
               circleci-agent step halt
             fi
