@@ -230,9 +230,9 @@ workflows:
           command: |
             if [ -z "$APPLITOOLS_API_KEY_FOO" ]; then
               echo "Skipping Applitools test job, missing environment variable APPLITOOLS_API_KEY"
-              circleci-agent step halt
+            else
+              npm test
             fi
-            npm test
           store_artifacts: true
 
       - cypress/run:
