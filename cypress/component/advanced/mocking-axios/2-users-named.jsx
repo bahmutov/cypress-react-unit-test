@@ -1,5 +1,5 @@
 import React from 'react'
-// use named import
+// use named import "get" from the module
 import { get } from 'axios'
 
 export class Users extends React.Component {

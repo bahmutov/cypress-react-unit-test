@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
 import React from 'react'
 import { mount } from 'cypress-react-unit-test'
-import { Users } from './users-named.jsx'
-import * as Axios from 'axios'
+import { Users } from './2-users-named.jsx'
+// to mock CommonJS module loaded from `node_modules` use "require" in spec file
+const Axios = require('axios')
 
 describe('Mocking Axios named import get', () => {
   it('shows real users', () => {
@@ -10,8 +11,7 @@ describe('Mocking Axios named import get', () => {
     cy.get('li').should('have.length', 3)
   })
 
-  // https://github.com/bahmutov/cypress-react-unit-test/issues/338
-  it.skip('mocks get', () => {
+  it('mocks get', () => {
     console.log('Axios', Axios)
     cy.stub(Axios, 'get')
       .resolves({

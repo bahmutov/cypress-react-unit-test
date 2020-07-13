@@ -1,5 +1,6 @@
 import React from 'react'
-// import entire axios module
+// import the entire axios module
+// later we can use axios.get to make requests
 import axios from 'axios'
 
 export class Users extends React.Component {

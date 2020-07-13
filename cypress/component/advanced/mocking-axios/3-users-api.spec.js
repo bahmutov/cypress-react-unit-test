@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import React from 'react'
 import { mount } from 'cypress-react-unit-test'
-import { Users } from './users-api.jsx'
+import { Users } from './3-users-api.jsx'
 import * as Axios from './axios-api'
 
 describe('Mocking wrapped Axios', () => {
@@ -10,7 +10,6 @@ describe('Mocking wrapped Axios', () => {
     cy.get('li').should('have.length', 3)
   })
 
-  // https://github.com/bahmutov/cypress-react-unit-test/issues/338
   it('mocks get', () => {
     console.log('Axios', Axios)
     cy.stub(Axios, 'get')
