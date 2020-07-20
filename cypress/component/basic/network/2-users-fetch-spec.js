@@ -5,14 +5,14 @@ import React from 'react'
 import { mount } from 'cypress-react-unit-test'
 
 describe('Users with Fetch', () => {
-  it.only('fetches 3 users from remote API', () => {
+  it('fetches 3 users from remote API', () => {
     mount(<Users />)
     // fetching users can take a while
     cy.get('li', { timeout: 20000 }).should('have.length', 3)
   })
 
   // https://github.com/bahmutov/cypress-react-unit-test/issues/347
-  context.skip('mocking', () => {
+  context('mocking', () => {
     beforeEach(() => {
       cy.server()
       // mount the component after defining routes in tests
