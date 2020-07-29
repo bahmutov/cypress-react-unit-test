@@ -1,8 +1,6 @@
 import React from 'react'
 import RemotePizza from './RemotePizza'
 import { mount } from 'cypress-react-unit-test'
-// prepare for import mocking
-import * as services from './services'
 
 const ingredients = ['bacon', 'tomato', 'mozzarella', 'pineapples']
 
@@ -32,9 +30,10 @@ describe('RemotePizza', () => {
     }
   })
 
-  // verify the module plugin is inserted correctly
-  it.skip('mocks named import from services', () => {
-    cy.stub(services, 'fetchIngredients').resolves({ args: { ingredients } })
+  it('mocks default props method', () => {
+    cy.stub(RemotePizza.defaultProps, 'fetchIngredients').resolves({
+      args: { ingredients },
+    })
     mount(<RemotePizza />)
     cy.contains('button', /cook/i).click()
 
