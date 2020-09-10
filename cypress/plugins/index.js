@@ -2,7 +2,6 @@ const path = require('path')
 const webpackPreprocessor = require('@cypress/webpack-preprocessor')
 const babelConfig = require('../../babel.config.js')
 
-console.log(babelConfig)
 /** @type import("webpack").Configuration */
 const webpackOptions = {
   resolve: {
