@@ -1,7 +1,7 @@
-import './styles.css'
+import './counter.css'
 import React from 'react'
 import { mount } from 'cypress-react-unit-test'
-import Counter from './Counter.jsx'
+import { Counter } from './Counter.jsx'
 
 describe('reactive-state Counter', () => {
   it('increments count on click', () => {

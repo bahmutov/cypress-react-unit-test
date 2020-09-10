@@ -3,7 +3,7 @@ import useRS from 'radioactive-state'
 
 // click on the counter to increment
 
-const Counter = () => {
+export const Counter = () => {
   // create a radioactive state
   const state = useRS({
     count: 0,
@@ -18,5 +18,3 @@ const Counter = () => {
     </div>
   )
 }
-
-export default Counter
