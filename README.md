@@ -181,6 +181,7 @@ Spec | Description
 [portal](cypress/component/advanced/portal) | Component test for `ReactDOM.createPortal` feature
 [react-bootstrap](cypress/component/advanced/react-bootstrap) | Confirms [react-bootstrap](https://react-bootstrap.github.io/) components are working
 [select React component](cypress/component/advanced/react-book-example/src/components/ProductsList.spec.js) | Uses [cypress-react-selector](https://github.com/abhinaba-ghosh/cypress-react-selector) to find DOM elements using React component name and state values
+[lazy-loaded](cypress/component/advanced/lazy-loaded) | Uses multiple chunks and async components with `React.lazy` + `React.Suspense`.
 <!-- prettier-ignore-end -->
 
 ### Full examples
