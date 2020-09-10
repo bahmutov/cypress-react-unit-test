@@ -1,6 +1,6 @@
 # example: using-babel
 
-> Component testing for projects using Babel config
+> Component testing for typescript projects using Babel config with `@babel/preset-typescript`
 
 ![Example component test](images/dynamic.gif)
 
@@ -31,7 +31,7 @@ npm test
 
 ## Specs
 
-See spec files [src/\*.spec.js](src). The specs are bundled using [.babelrc](.babelrc) settings via [cypress/plugins/index.js](cypress/plugins/index.js) file that includes file preprocessor
+See spec files [src/\*.spec.js](src). The specs are bundled using [babel.config.js](babel.config.js) settings via [cypress/plugins/index.js](cypress/plugins/index.js) file that includes file preprocessor.
 
 ```js
 // let's bundle spec files and the components they include using
@@ -49,7 +49,7 @@ module.exports = (on, config) => {
 
 During test runs, there is a Babel plugin that transforms ES6 imports into plain objects that can be stubbed using [cy.stub](https://on.cypress.io/stub). In essence
 
-```js
+```ts
 // component imports named ES6 import from "calc.js
 import { getRandomNumber } from './calc'
 const Component = () => {
@@ -62,12 +62,11 @@ const Component = () => {
 The test can mock that import before mounting the component
 
 ```js
-import Component from './Component.jsx'
+import Component from './Component'
 import * as calc from './calc'
 describe('Component', () => {
   it('mocks call from the component', () => {
     cy.stub(calc, 'getRandomNumber')
-      .as('lucky')
       .returns(777)
     mount(<Component />)
   })
