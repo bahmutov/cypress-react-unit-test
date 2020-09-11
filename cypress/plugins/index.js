@@ -5,7 +5,7 @@ const babelConfig = require('../../babel.config.js')
 /** @type import("webpack").Configuration */
 const webpackOptions = {
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.jsx'],
+    extensions: ['.js', '.ts', '.jsx', '.tsx'],
     alias: {
       react: path.resolve('./node_modules/react'),
     },

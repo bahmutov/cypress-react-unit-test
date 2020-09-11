@@ -179,9 +179,11 @@ Spec | Description
 [tutorial](cypress/component/advanced/tutorial) | A few tests adopted from [ReactJS Tutorial](https://reactjs.org/tutorial/tutorial.html), including Tic-Tac-Toe game
 [use-local-storage](cypress/component/advanced/use-local-storage) | Use hooks to load and save items into `localStorage`
 [portal](cypress/component/advanced/portal) | Component test for `ReactDOM.createPortal` feature
+[radioactive-state](cypress/component/advanced/radioactive-state) | Testing components that use [radioactive-state](https://github.com/MananTank/radioactive-state) library
 [react-bootstrap](cypress/component/advanced/react-bootstrap) | Confirms [react-bootstrap](https://react-bootstrap.github.io/) components are working
 [select React component](cypress/component/advanced/react-book-example/src/components/ProductsList.spec.js) | Uses [cypress-react-selector](https://github.com/abhinaba-ghosh/cypress-react-selector) to find DOM elements using React component name and state values
-[lazy-loaded](cypress/component/advanced/lazy-loaded) | Uses multiple chunks and async components with `React.lazy` + `React.Suspense`.
+[lazy-loaded](cypress/component/advanced/lazy-loaded-suspense) | Uses multiple chunks and async components with `React.lazy` + `React.Suspense`.
+[i18n](cypress/component/advanced/i18n) | Uses[react-i18next](https://react.i18next.com/) for localizaiton.
 <!-- prettier-ignore-end -->
 
 ### Full examples
@@ -365,7 +367,7 @@ Currently, this project cannot find Webpack settings used by Gatsby.js, thus it 
 
 ## Chat
 
-We have a chat workspace at [https://component-testing.slack.com/](https://component-testing.slack.com/), you are welcome to [join us](https://join.slack.com/t/component-testing/shared_invite/zt-g4k6sget-oj2wlswjNTb38s0n7kql1A).
+We have a chat workspace at [https://component-testing.slack.com/](https://component-testing.slack.com/), you are welcome to [join us](https://join.slack.com/t/component-testing/shared_invite/zt-h93lrgsl-8WzE8yNQlcZuZji_gA_mtg).
 
 ## Development
 
