@@ -14,18 +14,15 @@ describe('framer-motion', () => {
     cy.clock()
     mount(<Motion />)
 
+    // CI is slow, so check only the approximate values
     cy.tick(800)
-    cy.get("[data-testid='motion']").should(
-      'have.css',
-      'border-radius',
-      '43.3777%',
-    )
+    cy.get("[data-testid='motion']").within(element => {
+      expect(parseInt(element.css('borderRadius'))).to.equal(43)
+    })
 
     cy.tick(100)
-    cy.get("[data-testid='motion']").should(
-      'have.css',
-      'border-radius',
-      '48.2203%',
-    )
+    cy.get("[data-testid='motion']").within(element => {
+      expect(parseInt(element.css('borderRadius'))).to.equal(48)
+    })
   })
 })
