@@ -167,5 +167,28 @@ export const unmount = () => {
   })
 }
 
+/**
+ * Mount a React component in a blank document; register it as an alias
+ * To access: use an alias or original component reference
+ * @function   createMount
+ * @param      {React.ReactElement}  element - component to mount
+ * @param      {MountOptions}  [defaultOptions] - defaultOptions that will be used to mount
+ * @example
+ * ```
+ * import Hello from './hello.jsx'
+ * import { createMount } from 'cypress-react-unit-test'
+ * it('works', () => {
+ *   const mount = createMount({ cssFile: 'path/to/any/css/file.css', })
+ *   mount(<Hello />)
+ *   // use Cypress commands
+ *   cy.get('button').should('have.css', 'color', 'rgb(124, 12, 109)')
+ * })
+ ```
+ **/
+export const createMount = (defaultOptions: MountOptions) => (
+  element: React.ReactElement,
+  options: MountOptions,
+) => mount(element, { ...defaultOptions, ...options })
+
 /** @deprecated Should be removed in the next major version */
 export default mount
