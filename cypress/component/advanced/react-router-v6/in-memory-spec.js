@@ -16,13 +16,12 @@ describe('React Memory Router', () => {
       </MemoryRouter>,
     )
 
-    // because the routing is in memory, the URL stays at the spec filename
-    cy.location('pathname').should('match', /in-memory-spec.js$/)
-
     // we are mocking the initial open route with `initialIndex`
     // so we should see "About" component
     cy.log('**About** component')
     cy.contains('h2', 'About')
+    // because the routing is in memory, the URL stays at the spec filename
+    cy.location('pathname').should('match', /in-memory-spec.js$/)
 
     // Go to home route
     cy.contains('a', 'Home').click()
