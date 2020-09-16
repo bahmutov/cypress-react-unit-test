@@ -35,9 +35,9 @@ npm test
 
 ## Server side props
 
-⚠️⚠️ **Important:** ⚠️⚠️ Please do not test the page components using component testing. These components have too much responsibility and needs to be tested as a part of your application flow. Consider using cypress `integration` tests.
+⚠️⚠️ **Important:** ⚠️⚠️ Please do not test the page components using component testing. These components have too much responsibility and need to be tested as a part of your application flow. Consider using cypress `integration` tests.
 
-But if you still want to test page component, make sure that it will be render as any other `React` component. It means that next's specific functions like `getInitialProps` or `getStaticProps` **won't be called**.
+But if you still want to test the page component, make sure that it will be mounted as any other pure `React` component. It means that next's specific functions like `getInitialProps` or `getStaticProps` **won't be called**.
 
 But still you can call them manually:
 
