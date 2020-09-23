@@ -11,7 +11,6 @@
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceRoot}",
-      "args": ["--pattern", "DesktopDateRangePicker"],
       "program": "${workspaceFolder}/init/init.ts",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     },
@@ -22,8 +21,6 @@
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "args": ["--runInBand", "${fileBasenameNoExtension}"],
       "sourceMaps": true,
-      // "preLaunchTask": "npm: test:typescript - lib",
-      // "outFiles": ["${workspaceFolder}/lib/src/__tests__/dist/**/*.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true
