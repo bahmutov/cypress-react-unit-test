@@ -1,0 +1,6 @@
+{
+  "testFiles": "**/*spec.{ts,tsx}",
+  "experimentalComponentTesting": true,
+  "experimentalFetchPolyfill": true,
+  "componentFolder": "src"
+}

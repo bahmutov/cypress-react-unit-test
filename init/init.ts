@@ -10,12 +10,14 @@ import { NextTemplate } from './templates/next'
 import { WebpackTemplate } from './templates/webpack-file'
 import { ReactScriptsTemplate } from './templates/react-scripts'
 import { BabelTemplate } from './templates/babel'
+import { RollupTemplate } from './templates/rollup'
 import { WebpackOptions } from './templates/webpack-options'
 
 const templates: Record<string, Template<any>> = {
   'next.js': NextTemplate,
   'create-react-app': ReactScriptsTemplate,
   webpack: WebpackTemplate,
+  rollup: RollupTemplate,
   babel: BabelTemplate,
   'default (webpack options)': WebpackOptions,
 }
