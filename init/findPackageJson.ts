@@ -38,8 +38,11 @@ export function createFindPackageJsonIterator(rootPath = process.cwd()) {
       }
     }
 
-    const packageJsonBuffer = fs.readFileSync(packageJsonPath)
-    const packageData = JSON.parse(packageJsonBuffer.toString('utf-8'))
+    const packageData = JSON.parse(
+      fs.readFileSync(packageJsonPath, {
+        encoding: 'utf-8',
+      }),
+    )
 
     return {
       packageData,
