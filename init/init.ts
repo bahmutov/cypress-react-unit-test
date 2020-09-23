@@ -142,6 +142,15 @@ function printPluginHelper(pluginCode: string, pluginsFilePath: string) {
 }
 
 export async function main<T>() {
+  const packageVersion =
+    process.env.npm_package_version ?? require('../package.json').version
+
+  console.log(
+    `${chalk.green(
+      `cypress-react-unit-test@${packageVersion}`,
+    )} init component testing wizard\n`,
+  )
+
   const { config, cypressConfigPath } = await getCypressConfig()
   const {
     defaultTemplate,
