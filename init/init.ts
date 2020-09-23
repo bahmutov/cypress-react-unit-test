@@ -53,10 +53,19 @@ async function getCypressConfig() {
   // TODO figure out how to work with newly installed cypress
   if (!cypressJsonPath) {
     console.log(
-      `\nIt looks like you did not install cypress. Can not find ${chalk.green(
+      `\nIt looks like you did not install cypress, we were unable to find ${chalk.green(
         'cypress.json',
-      )} in this or parent directories.`,
+      )} in this or parent directories. Please install cypress, run ${chalk.inverse(
+        ' cypress open ',
+      )} and rerun this script.`,
     )
+
+    console.log(
+      `\nFind more information about installation and init script: ${chalk.bold.underline(
+        'https://github.com/bahmutov/cypress-react-unit-test#init',
+      )}`,
+    )
+
     process.exit(1)
   }
 
