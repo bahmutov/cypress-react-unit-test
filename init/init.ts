@@ -11,6 +11,7 @@ import { WebpackTemplate } from './templates/webpack-file'
 import { ReactScriptsTemplate } from './templates/react-scripts'
 import { BabelTemplate } from './templates/babel'
 import { RollupTemplate } from './templates/rollup'
+import { WebpackOptions } from './templates/webpack-options'
 
 const templates: Record<string, Template<any>> = {
   'next.js': NextTemplate,
@@ -18,6 +19,7 @@ const templates: Record<string, Template<any>> = {
   webpack: WebpackTemplate,
   rollup: RollupTemplate,
   babel: BabelTemplate,
+  'default (webpack options)': WebpackOptions,
 }
 
 type TemplateGuess<T> = {
@@ -26,7 +28,7 @@ type TemplateGuess<T> = {
   templatePayload: T | null
 }
 
-function guessTemplateForUsedFramework<T>(): TemplateGuess<T> {
+export function guessTemplateForUsedFramework<T>(): TemplateGuess<T> {
   for (const [name, template] of Object.entries(templates)) {
     const typedTemplate = template as Template<T>
     const { success, payload } = typedTemplate.test(process.cwd())
@@ -106,9 +108,7 @@ function printSupportHelper(supportFilePath: string) {
       : requireCode
 
     console.log(
-      `\n${stepNumber} This to the ${chalk.green.underline(
-        relativeSupportPath,
-      )}:`,
+      `\n${stepNumber} This to the ${chalk.green(relativeSupportPath)}:`,
     )
     console.log(
       `\n${highlight(importCodeWithPreferredStyle, { language: 'js' })}\n`,
@@ -134,7 +134,7 @@ function printPluginHelper(pluginCode: string, pluginsFilePath: string) {
   console.log(`\n${highlightedPluginCode}\n`)
 }
 
-async function main<T>() {
+export async function main<T>() {
   const { config, cypressConfigPath } = await getCypressConfig()
   const {
     defaultTemplate,
@@ -172,7 +172,7 @@ async function main<T>() {
           )} to continue with ${chalk.green(
             defaultTemplateName,
           )} configuration or select other template from the list:`
-        : 'We were not able to automatically determine which framework you are using. Please choose from the list which configuration to use:',
+        : 'We were not able to automatically determine which framework or bundling tool you are using. Please choose from the list which configuration to use:',
     },
     {
       type: 'input',
@@ -208,10 +208,18 @@ async function main<T>() {
       chosenTemplateName,
     )}: ${chalk.bold.underline(
       chosenTemplate.getExampleUrl({ componentFolder }),
+    )}\n`,
+  )
+
+  console.log(
+    `Docs for different recipes of bundling tools: ${chalk.bold.underline(
+      'https://github.com/bahmutov/cypress-react-unit-test/blob/main/docs/recipes.md',
     )}`,
   )
 
   console.log(`\nHappy testing with ${chalk.green('cypress.io')} 🔥🔥🔥\n`)
 }
 
-main().catch(e => console.error(e))
+if (process.env.NODE_ENV !== 'test') {
+  main().catch(e => console.error(e))
+}
