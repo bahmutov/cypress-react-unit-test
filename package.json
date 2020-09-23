@@ -9,7 +9,7 @@
     "test": "cypress run",
     "test:unit": "jest --runInBand",
     "percy:test": "percy exec -- cypress run",
-    "build": "npm run transpile && npm run transpile:bin",
+    "build": "npm run transpile && npm run transpile:bin && chmod +x bin/init.js",
     "cy:open": "cypress open",
     "transpile": "tsc",
     "transpile:bin": "tsc -p tsconfig.bin.json",
