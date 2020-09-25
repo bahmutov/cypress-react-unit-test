@@ -331,6 +331,21 @@ Find full example in [sass-and-ts](examples/sass-and-ts) folder.
 
 </details>
 
+<details id="fast-enough">
+  <summary>Slower than Jest</summary>
+
+When you use `cypress-X-unit-test` for component testing, you might notice the tests are slower than using Jest to test the same components. Yes, that's true. A test runner could be made _extremely_ fast if it did nothing, just check out the [auchenberg/volkswagen](https://github.com/auchenberg/volkswagen) test runner - it is blazing on CI 😉. Of course, Jest does do things, just not inside the real browser environment.
+
+Testing using Jest with its jsdom browser is faster than starting the real browser, loading all libraries, mounting the component and then waiting for the component to actually perform its work in response to the test's actions. But do those tests give you a true confidence that the component is working?
+
+We think that using `cypress-X-unit-test` runs tests as _fast as your application code is_, and often you need to think how to _slow down_ the Cypress Test Runner so it does not run away from the component's code, just see our blog posts dealing with [test flake](https://cypress.io/blog/tag/flake/).
+
+From the developer's perspective I would ask myself: which tests do I _write faster_? What happens when a test fails and I need to debug the failure: which test runner allows me to _debug a failed test quicker_? While I am partial, I have to say, realistic Cypress tests are easier to write and debug.
+
+Finally, when running tests on the continuous integration service, the true test speed up comes from properly configuring [dependencies caching](https://on.cypress.io/caching) and running [tests in parallel](https://on.cypress.io/parallelization) - something we have extensively documented and consider a solved problem.
+
+</details>
+
 <details id="speed">
   <summary>Slow bundling</summary>
 
