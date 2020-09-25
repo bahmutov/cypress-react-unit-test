@@ -338,20 +338,23 @@ When you use `cypress-X-unit-test` for component testing, you might notice the t
 
 Testing using Jest with its jsdom browser is faster than starting the real browser, loading all libraries, mounting the component and then waiting for the component to actually perform its work in response to the test's actions. But do those tests give you a true confidence that the component is working?
 
-Try this test 🙈 
-> spoiler it fails. [proof](https://codesandbox.io/s/react-testing-library-demo-forked-z7l2o?file=/src/__tests__/components.js)
+Try this test 🙈
+
+Spoiler: it fails, [proof](https://codesandbox.io/s/react-testing-library-demo-forked-z7l2o?file=/src/__tests__/components.js).
+
 ```js
-const mock = jest.fn();
+const mock = jest.fn()
+// render a component that does NOT allow any click events
+// using pointerEvents: "none" style
 const { getByRole } = render(
-  <button style={{ pointerEvents: "none" }} onClick={mock}>
+  <button style={{ pointerEvents: 'none' }} onClick={mock}>
     text
-  </button>
-);
-
-fireEvent.click(getByRole("button"));
-expect(mock).not.toBeCalled();
-```js
-
+  </button>,
+)
+// Jest happily clicks
+fireEvent.click(getByRole('button'))
+expect(mock).not.toBeCalled()
+```
 
 We think that using `cypress-X-unit-test` runs tests as _fast as your application code is_, and often you need to think how to _slow down_ the Cypress Test Runner so it does not run away from the component's code, just see our blog posts dealing with [test flake](https://cypress.io/blog/tag/flake/).
 
