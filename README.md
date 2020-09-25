@@ -135,6 +135,7 @@ Spec | Description
 [enzyme](cypress/component/basic/enzyme) | Several specs showing how to recreate Enzyme's `setProps`, `setState`, and `setContext` methods.
 [emotion-spec.js](cypress/component/basic/emotion-spec.js) | Confirms the component is using `@emotion/core` and styles are set
 [error-boundary-spec.js](cypress/component/basic/error-boundary-spec.js) | Checks if an error boundary component works
+[fails-correctly](cypress/component/basic/fails-correctly) | Cypress test fails correctly when interacting with disabled elements
 [pure-component-spec.js](cypress/component/basic/pure-component.spec.js) | Tests stateless component
 [stateless-spec.js](cypress/component/basic/stateless-spec.js) | Passes Cypress stub to the component, confirms the component calls it on click
 [window-spec.js](cypress/component/basic/window-spec.js) | In the component test, the spec `window` and the application's `window` where the component is running should be the same object
@@ -355,6 +356,8 @@ const { getByRole } = render(
 fireEvent.click(getByRole('button'))
 expect(mock).not.toBeCalled()
 ```
+
+Cypress test on the other hand [fails correctly](cypress/component/basic/fails-correctly).
 
 We think that using `cypress-X-unit-test` runs tests as _fast as your application code is_, and often you need to think how to _slow down_ the Cypress Test Runner so it does not run away from the component's code, just see our blog posts dealing with [test flake](https://cypress.io/blog/tag/flake/).
 
