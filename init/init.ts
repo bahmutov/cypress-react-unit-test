@@ -55,7 +55,9 @@ async function getCypressConfig() {
     console.log(
       `\nIt looks like Cypress is not installed because we were unable to find ${chalk.green(
         'cypress.json',
-      )} in this project. Please install Cypress via ${chalk.inverse( yarn add cypress -D )} (or via npm), then run ${chalk.inverse(
+      )} in this project. Please install Cypress via ${chalk.inverse(
+        ' yarn add cypress -D ',
+      )} (or via npm), then run ${chalk.inverse(
         ' cypress open ',
       )} and rerun this script.`,
     )
