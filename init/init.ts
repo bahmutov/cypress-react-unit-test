@@ -224,7 +224,7 @@ export async function main<T>() {
   console.log(
     `Find examples of component tests for ${chalk.green(
       chosenTemplateName,
-    )} in ${chosenTemplate.getExampleUrl({ componentFolder })}.
+    )} in ${chalk.underline(chosenTemplate.getExampleUrl({ componentFolder }))}.
     \n`,
   )
 

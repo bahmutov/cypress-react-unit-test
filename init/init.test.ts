@@ -10,6 +10,7 @@ jest.spyOn(global.console, 'log')
 
 describe('end-to-end tests for init script', () => {
   beforeEach(clearMockedFs)
+  afterEach(() => jest.clearAllMocks())
 
   it('automatically suggests to the user which config to use', async () => {
     mockFs({
@@ -80,13 +81,17 @@ describe('end-to-end tests for init script', () => {
 
     await main()
 
-    expect(global.console.log).toBeCalledWith(
-      `Working example of component tests with ${chalk.green(
-        'create-react-app',
-      )}: ${chalk.bold.underline(
-        'https://github.com/bahmutov/cypress-react-unit-test/tree/main/examples/react-scripts',
-      )}\n`,
-    )
+    expect(
+      // @ts-ignore
+      global.console.log.mock.calls.some(
+        ([call]: string[]) =>
+          // Make sure that link to the example of right template was logged
+          call.includes('create-react-app') &&
+          call.includes(
+            'https://github.com/bahmutov/cypress-react-unit-test/tree/main/examples/react-scripts',
+          ),
+      ),
+    ).toBe(true)
   })
 
   it('suggests right docs example and cypress.json config based on the `componentFolder` answer', async () => {
