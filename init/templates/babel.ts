@@ -6,9 +6,9 @@ import { createFindPackageJsonIterator } from '../findPackageJson'
 export const BabelTemplate: Template = {
   message: `It looks like you have babel config defined. We can use it to transpile your components for testing.\n ${chalk.red(
     '>>',
-  )} This is not a replacement for ${chalk.red(
+  )} This is not a replacement for bundling tool. We will use ${chalk.red(
     'webpack',
-  )} we still need to bundle the components.`,
+  )} to bundle the components for testing.`,
   getExampleUrl: () =>
     'https://github.com/bahmutov/cypress-react-unit-test/tree/main/examples/babel',
   recommendedComponentFolder: 'cypress/component',

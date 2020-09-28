@@ -53,15 +53,15 @@ async function getCypressConfig() {
   // TODO figure out how to work with newly installed cypress
   if (!cypressJsonPath) {
     console.log(
-      `\nIt looks like you did not install cypress, we were unable to find ${chalk.green(
+      `\nIt looks like Cypress is not installed because we were unable to find ${chalk.green(
         'cypress.json',
-      )} in this or parent directories. Please install cypress, run ${chalk.inverse(
+      )} in this project. Please install Cypress via ${chalk.inverse( yarn add cypress -D )} (or via npm), then run ${chalk.inverse(
         ' cypress open ',
       )} and rerun this script.`,
     )
 
     console.log(
-      `\nFind more information about installation and init script: ${chalk.bold.underline(
+      `\nFind more information about installation at: ${chalk.bold.underline(
         'https://github.com/bahmutov/cypress-react-unit-test#init',
       )}`,
     )
@@ -220,11 +220,10 @@ export async function main<T>() {
   }
 
   console.log(
-    `Working example of component tests with ${chalk.green(
+    `Find examples of component tests for ${chalk.green(
       chosenTemplateName,
-    )}: ${chalk.bold.underline(
-      chosenTemplate.getExampleUrl({ componentFolder }),
-    )}\n`,
+    )} in ${chosenTemplate.getExampleUrl({ componentFolder })}.
+    \n`,
   )
 
   console.log(
@@ -233,7 +232,7 @@ export async function main<T>() {
     )}`,
   )
 
-  console.log(`\nHappy testing with ${chalk.green('cypress.io')} 🔥🔥🔥\n`)
+  console.log(`\nHappy testing with ${chalk.green('cypress.io')} ⚛️🌲\n`)
 }
 
 if (process.env.NODE_ENV !== 'test') {
