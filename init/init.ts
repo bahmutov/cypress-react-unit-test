@@ -187,8 +187,8 @@ export async function main<T>() {
             ' Enter ',
           )} to continue with ${chalk.green(
             defaultTemplateName,
-          )} configuration or select other template from the list:`
-        : 'We were not able to automatically determine which framework or bundling tool you are using. Please choose from the list which configuration to use:',
+          )} configuration or select another template from the list:`
+        : 'We were not able to automatically determine which framework or bundling tool you are using. Please choose one from the list:',
     },
     {
       type: 'input',
@@ -198,7 +198,7 @@ export async function main<T>() {
         input === '' || !/^[a-zA-Z].*/.test(input)
           ? `Directory "${input}" is invalid`
           : true,
-      message: 'Which folder would you like to use for component tests?',
+      message: 'Which folder would you like to use for your component tests?',
       default: (answers: { chosenTemplateName: keyof typeof templates }) =>
         templates[answers.chosenTemplateName].recommendedComponentFolder,
     },
