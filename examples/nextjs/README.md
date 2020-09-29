@@ -55,6 +55,39 @@ cy.contains(
 
 Find more examples in [Page.spec.jsx](./cypress/components/Page.spec.jsx).
 
+## Router mocking
+
+If your components depends on the next.js router (using `useRouter` or `withRouter`) **we recommend to cover this component with integration tests**, because this component is likely not reusable and depends on application flow. But if you still need to write component test for it you will likely meet the problem like `cannot read property 'pathname' of undefined`.
+
+It happens because we render the component just like any other react component – without any specific next.js features. In order to make router work it is required to provide specific context that would be picked up by `useRouter`:
+
+```js
+import { createRouter } from 'next/router'
+import { RouterContext } from 'next/dist/next-server/lib/router-context'
+import { mount } from 'cypress-react-unit-test'
+
+// This is internal factory for router inside next.js
+// It has well written typescript definitions – so please refer the types of signature
+// P.S. using cy.stub() here is not required, it is possible to pass simple () => {} function
+const router = createRouter('/testPath', { param1: 'param1' }, '/asTestPath', {
+  subscription: cy.stub(),
+  initialProps: {},
+  App: cy.stub(),
+  Component: cy.stub(),
+  pageLoader: cy.stub(),
+  initialStyleSheets: [],
+  wrapApp: cy.stub(),
+  isFallback: false,
+})
+
+// And wrap your component with special provider
+mount(
+  <RouterContext.Provider value={router}>
+    <YourComponent />
+  </RouterContext.Provider>,
+)
+```
+
 ## Mocking imports
 
 Mocking imports is not working yet, seems the plugin we are inserting for loose mode causes problems, see issue [439](https://github.com/bahmutov/cypress-react-unit-test/issues/439).
