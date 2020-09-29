@@ -10,14 +10,12 @@ import { NextTemplate } from './templates/next'
 import { WebpackTemplate } from './templates/webpack-file'
 import { ReactScriptsTemplate } from './templates/react-scripts'
 import { BabelTemplate } from './templates/babel'
-import { RollupTemplate } from './templates/rollup'
 import { WebpackOptions } from './templates/webpack-options'
 
 const templates: Record<string, Template<any>> = {
   'next.js': NextTemplate,
   'create-react-app': ReactScriptsTemplate,
   webpack: WebpackTemplate,
-  rollup: RollupTemplate,
   babel: BabelTemplate,
   'default (webpack options)': WebpackOptions,
 }
@@ -55,10 +53,21 @@ async function getCypressConfig() {
   // TODO figure out how to work with newly installed cypress
   if (!cypressJsonPath) {
     console.log(
-      `\nIt looks like you did not install cypress. Can not find ${chalk.green(
+      `\nIt looks like Cypress is not installed because we were unable to find ${chalk.green(
         'cypress.json',
-      )} in this or parent directories.`,
+      )} in this project. Please install Cypress via ${chalk.inverse(
+        ' yarn add cypress -D ',
+      )} (or via npm), then run ${chalk.inverse(
+        ' cypress open ',
+      )} and rerun this script.`,
     )
+
+    console.log(
+      `\nFind more information about installation at: ${chalk.bold.underline(
+        'https://github.com/bahmutov/cypress-react-unit-test#init',
+      )}`,
+    )
+
     process.exit(1)
   }
 
@@ -135,6 +144,15 @@ function printPluginHelper(pluginCode: string, pluginsFilePath: string) {
 }
 
 export async function main<T>() {
+  const packageVersion =
+    process.env.npm_package_version ?? require('../package.json').version
+
+  console.log(
+    `${chalk.green(
+      `cypress-react-unit-test@${packageVersion}`,
+    )} init component testing wizard\n`,
+  )
+
   const { config, cypressConfigPath } = await getCypressConfig()
   const {
     defaultTemplate,
@@ -171,8 +189,8 @@ export async function main<T>() {
             ' Enter ',
           )} to continue with ${chalk.green(
             defaultTemplateName,
-          )} configuration or select other template from the list:`
-        : 'We were not able to automatically determine which framework or bundling tool you are using. Please choose from the list which configuration to use:',
+          )} configuration or select another template from the list:`
+        : 'We were not able to automatically determine which framework or bundling tool you are using. Please choose one from the list:',
     },
     {
       type: 'input',
@@ -182,7 +200,7 @@ export async function main<T>() {
         input === '' || !/^[a-zA-Z].*/.test(input)
           ? `Directory "${input}" is invalid`
           : true,
-      message: 'Which folder would you like to use for component tests?',
+      message: 'Which folder would you like to use for your component tests?',
       default: (answers: { chosenTemplateName: keyof typeof templates }) =>
         templates[answers.chosenTemplateName].recommendedComponentFolder,
     },
@@ -204,11 +222,10 @@ export async function main<T>() {
   }
 
   console.log(
-    `Working example of component tests with ${chalk.green(
+    `Find examples of component tests for ${chalk.green(
       chosenTemplateName,
-    )}: ${chalk.bold.underline(
-      chosenTemplate.getExampleUrl({ componentFolder }),
-    )}\n`,
+    )} in ${chalk.underline(chosenTemplate.getExampleUrl({ componentFolder }))}.
+    \n`,
   )
 
   console.log(
@@ -217,7 +234,7 @@ export async function main<T>() {
     )}`,
   )
 
-  console.log(`\nHappy testing with ${chalk.green('cypress.io')} 🔥🔥🔥\n`)
+  console.log(`\nHappy testing with ${chalk.green('cypress.io')} ⚛️🌲\n`)
 }
 
 if (process.env.NODE_ENV !== 'test') {

@@ -21,9 +21,9 @@ export function validateSemverVersion(
     const packageNameSymbol = chalk.green(packageName)
 
     console.warn(
-      `Seems like you are using ${packageNameSymbol} of version ${chalk.bold(
+      `It seems like you are using ${packageNameSymbol} with version ${chalk.bold(
         version,
-      )}, but we support only ${packageNameSymbol} projects with version ${chalk.bold(
+      )}, however we support only ${packageNameSymbol} projects with version ${chalk.bold(
         allowedVersionRange,
       )}. Trying to find another template...`,
     )
