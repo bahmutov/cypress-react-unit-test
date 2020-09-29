@@ -62,23 +62,27 @@ If your components depends on the next.js router (using `useRouter` or `withRout
 It happens because we render the component just like any other react component – without any specific next.js features. In order to make router work it is required to provide specific context that would be picked up by `useRouter`:
 
 ```js
-import { createRouter } from 'next/router'
-import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { mount } from 'cypress-react-unit-test'
+import { RouterContext } from 'next/dist/next-server/lib/router-context'
 
-// This is internal factory for router inside next.js
-// It has well written typescript definitions – so please refer the types of signature
-// P.S. using cy.stub() here is not required, it is possible to pass simple () => {} function
-const router = createRouter('/testPath', { param1: 'param1' }, '/asTestPath', {
-  subscription: cy.stub(),
-  initialProps: {},
-  App: cy.stub(),
-  Component: cy.stub(),
-  pageLoader: cy.stub(),
-  initialStyleSheets: [],
-  wrapApp: cy.stub(),
+// Create a router value you need for the components. Here are all available values as for next v9.5
+// P.S. using cy.spy() here is not required, it is possible to pass simple () => {} function
+const router = {
+  pathname: '/testPath',
+  route: '/testPath',
+  query: {},
+  asPath: '/testPath',
+  components: {},
   isFallback: false,
-})
+  basePath: '',
+  events: { emit: cy.spy(), off: cy.spy(), on: cy.spy() },
+  push: cy.spy(),
+  replace: cy.spy(),
+  reload: cy.spy(),
+  back: cy.spy(),
+  prefetch: cy.spy(),
+  beforePopState: cy.spy(),
+}
 
 // And wrap your component with special provider
 mount(
@@ -87,6 +91,8 @@ mount(
   </RouterContext.Provider>,
 )
 ```
+
+Find more examples in [Router.spec.jsx](./cypress/components/Router.spec.jsx)
 
 ## Mocking imports
 
