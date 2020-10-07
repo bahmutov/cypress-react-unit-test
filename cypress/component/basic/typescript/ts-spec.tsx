@@ -13,6 +13,8 @@ describe('Component spec in typescript', () => {
   })
 
   it('calls passed on click prop', () => {
+    // TODO how to type this?
+    // @ts-ignore
     mount(<Button onClick={cy.stub().as('click')}>Click Me</Button>)
     cy.contains('button', 'Click Me').click()
     cy.get('@click').should('have.been.calledOnce')
@@ -20,6 +22,8 @@ describe('Component spec in typescript', () => {
 
   it('loads the component using path alias', () => {
     mount(
+      // TODO how to type this?
+      // @ts-ignore
       <SameButton onClick={cy.stub().as('click')}>Click Me Twice</SameButton>,
     )
     cy.contains('button', 'Click Me Twice')
