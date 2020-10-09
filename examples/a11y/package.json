@@ -3,12 +3,12 @@
   "description": "Testing component accessibility",
   "private": true,
   "scripts": {
-    "test": "cypress-expect run --passing 2",
+    "test": "cypress-expect run --passing 2 --pending 1",
     "cy:open": "cypress open"
   },
   "devDependencies": {
     "cypress-react-unit-test": "file:../..",
-    "cypress-expect": "2.0.2",
+    "cypress-expect": "2.1.0",
     "cypress": "5.3.0",
     "cypress-axe": "0.8.1",
     "react": "^16.13.1",
