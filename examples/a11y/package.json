@@ -7,11 +7,12 @@
     "cy:open": "cypress open"
   },
   "devDependencies": {
-    "cypress-react-unit-test": "file:../..",
-    "cypress-expect": "2.1.0",
     "cypress": "5.3.0",
     "cypress-axe": "0.8.1",
+    "cypress-expect": "2.1.0",
+    "cypress-react-unit-test": "file:../..",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "webpack": "4.44.2"
   }
 }
