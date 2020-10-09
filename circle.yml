@@ -17,7 +17,7 @@ workflows:
           # creates cypress-react-unit-test-0.0.0-development.tgz file
           # then saves everything in the workspace
           build: |
-            npm run transpile
+            npm run build
             npm pack
           post-steps:
             - run:
@@ -29,9 +29,6 @@ workflows:
             - run:
                 name: Stop exclusive tests 1️⃣
                 command: npm run stop-only
-            - run:
-                name: Build folder 🏗
-                command: npm run build
             - run:
                 name: Run unit tests 👷
                 command: npm run test:unit
@@ -188,7 +185,9 @@ workflows:
           executor: cypress/base-12
           install-command: |
             ls -la ../..
+            echo "Installing cypress-react-unit-test from root TGZ archive"
             npm install -D ../../cypress-react-unit-test-0.0.0-development.tgz
+            echo "Installing other dependencies"
             npm install
           verify-command: echo 'Already verified'
           no-workspace: true
