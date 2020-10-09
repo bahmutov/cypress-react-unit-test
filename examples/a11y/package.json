@@ -13,6 +13,7 @@
     "cypress-react-unit-test": "file:../..",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "webpack": "4.44.2"
+    "webpack": "4.44.2",
+    "babel-loader": "8.0.6"
   }
 }

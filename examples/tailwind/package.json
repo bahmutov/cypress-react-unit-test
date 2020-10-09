@@ -19,6 +19,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "tailwindcss": "1.4.6",
-    "webpack": "4.44.2"
+    "webpack": "4.44.2",
+    "babel-loader": "8.0.6"
   }
 }
