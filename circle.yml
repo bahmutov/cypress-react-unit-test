@@ -36,7 +36,8 @@ workflows:
       - cypress/run:
           name: Example A11y
           requires:
-            - Component Tests
+            - Install
+            # - Component Tests
           executor: cypress/base-12
           # each example installs "cypress-react-unit-test" as a local dependency (symlink)
           install-command: |
@@ -144,7 +145,8 @@ workflows:
       - cypress/run:
           name: Example Tailwind
           requires:
-            - Component Tests
+            - Install
+            # - Component Tests
           # each example installs "cypress-react-unit-test" as a local dependency (symlink)
           executor: cypress/base-12
           install-command: |
