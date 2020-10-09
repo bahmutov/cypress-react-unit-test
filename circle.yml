@@ -185,9 +185,9 @@ workflows:
           executor: cypress/base-12
           install-command: |
             ls -la ../..
-            echo "Installing cypress-react-unit-test from root TGZ archive"
+            echo ***Installing cypress-react-unit-test from root TGZ archive***
             npm install -D ../../cypress-react-unit-test-0.0.0-development.tgz
-            echo "Installing other dependencies"
+            echo ***Installing other dependencies***
             npm install
           verify-command: echo 'Already verified'
           no-workspace: true
