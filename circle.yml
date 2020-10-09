@@ -319,7 +319,7 @@ workflows:
       - cypress/run:
           name: Component Tests
           executor: cypress/base-12
-          parallelism: 4
+          parallelism: 2
           requires:
             - Install
           # notice a trick to avoid re-installing dependencies
