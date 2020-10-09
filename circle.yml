@@ -189,6 +189,8 @@ workflows:
             npm install -D ../../cypress-react-unit-test-0.0.0-development.tgz
             echo ***Installing other dependencies***
             npm install
+            echo ***rename root node_modules to avoid accidental dependencies***
+            mv ../../node_modules ../../no_modules
           verify-command: echo 'Already verified'
           no-workspace: true
           working_directory: examples/rollup
