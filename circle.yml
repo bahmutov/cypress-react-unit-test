@@ -31,6 +31,10 @@ workflows:
             - run:
                 name: Run unit tests 👷
                 command: npm run test:unit
+            - run:
+                # creates cypress-react-unit-test-0.0.0-development.tgz file
+                name: Pack the library 📦
+                command: npm pack
 
       - cypress/run:
           name: Example A11y
