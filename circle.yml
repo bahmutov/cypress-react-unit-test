@@ -103,8 +103,7 @@ workflows:
       - cypress/run:
           name: Example React Scripts
           requires:
-            - Install
-            # - Component Tests
+            - Component Tests
           executor: cypress/base-12
           install-command: |
             ls -la ../..
@@ -155,8 +154,7 @@ workflows:
           name: Example Component Folder
           executor: cypress/base-12
           requires:
-            - Install
-            # - Component Tests
+            - Component Tests
           install-command: |
             ls -la ../..
             echo ***Installing cypress-react-unit-test from root TGZ archive***
