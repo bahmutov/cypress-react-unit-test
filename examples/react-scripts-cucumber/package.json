@@ -12,7 +12,8 @@
     "cypress-react-unit-test": "file:../..",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "cypress-cucumber-preprocessor": "3.0.0"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
