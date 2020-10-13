@@ -1,8 +1,15 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts"],
+  "include": ["./**/*.ts*"],
   "compilerOptions": {
-    "baseUrl": "../node_modules",
-    "types": ["cypress"]
+    "baseUrl": ".",
+    "jsx": "react",
+    "types": ["cypress"],
+    "paths": {
+      "cypress-react-unit-test": ["../lib"],
+      // paths aliases
+      // https://glebbahmutov.com/blog/using-ts-aliases-in-cypress-tests/
+      "@basic/*": ["component/basic/*"]
+    }
   }
 }

@@ -1,9 +1,12 @@
 # Recipes
 
-- [Do nothing](#do-nothing)
-- [React scripts](#react-scripts)
-- [Your own Webpack config](#your-webpack-config)
-- [Your own Babelrc](#your-babelrc-file)
+- [Recipes](#recipes)
+  - [Do nothing](#do-nothing)
+  - [React Scripts](#react-scripts)
+  - [Next.js](#nextjs)
+  - [Your webpack config](#your-webpack-config)
+  - [Your `.babelrc` file](#your-babelrc-file)
+    - [Add Babel plugins](#add-babel-plugins)
 
 ## Do nothing
 
@@ -25,9 +28,23 @@ module.exports = (on, config) => {
 }
 ```
 
-See example repo [bahmutov/try-cra-with-unit-test](https://github.com/bahmutov/try-cra-with-unit-test)
+See example repo [bahmutov/try-cra-with-unit-test](https://github.com/bahmutov/try-cra-with-unit-test) or included example in the folder [examples/react-scripts](examples/react-scripts).
 
 **Tip:** `plugins/react-scripts` is just loading `plugins/cra-v3`.
+
+## Next.js
+
+```js
+// cypress/plugins/index.js
+module.exports = (on, config) => {
+  require('cypress-react-unit-test/plugins/next')(on, config)
+  // IMPORTANT to return the config object
+  // with the any changed environment variables
+  return config
+}
+```
+
+See example in the folder [examples/nextjs](examples/nextjs).
 
 ## Your webpack config
 
@@ -45,7 +62,7 @@ module.exports = (on, config) => {
 }
 ```
 
-See example in [bahmutov/Jscrambler-Webpack-React](https://github.com/bahmutov/Jscrambler-Webpack-React).
+See example in [bahmutov/Jscrambler-Webpack-React](https://github.com/bahmutov/Jscrambler-Webpack-React) or included example in the folder [examples/webpack-file](examples/webpack-file).
 
 ## Your `.babelrc` file
 
@@ -61,6 +78,8 @@ module.exports = (on, config) => {
   return config
 }
 ```
+
+See example in the folder [examples/using-babel](examples/using-babel) and [examples/using-babel-typescript](examples/using-babel-typescript).
 
 ### Add Babel plugins
 
@@ -105,3 +124,37 @@ When loading your `.babelrc` settings, `cypress-react-unit-test` sets `BABEL_ENV
 ```
 
 See [examples/using-babel](examples/using-babel) folder for full example.
+
+### Using rollup config
+
+If you are using rollup for bundling – we can use it as well for the bundling. Check the example:
+
+```js
+// // cypress/plugins/index.js
+const rollupPreprocessor = require('@bahmutov/cy-rollup')
+
+module.exports = (on, config) => {
+  on(
+    'file:preprocessor',
+    rollupPreprocessor({
+      // this is the default value
+      configFile: 'rollup.config.js',
+    }),
+  )
+
+  require('@cypress/code-coverage/task')(on, config)
+}
+```
+
+But make sure that several rollup plugins are required in order to bundle the code for cypress.
+
+```js
+// bundle node_modules
+nodeResolve(),
+// process commonjs modules
+commonjs(),
+// required for react (prop-types) sources
+replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+```
+
+See [examples/rollup](examples/rollup) folder for full example.

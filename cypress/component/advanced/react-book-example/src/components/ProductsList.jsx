@@ -5,12 +5,27 @@ class AProduct extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: props.name,
+      myName: props.name,
+      orderCount: 0,
     }
   }
 
+  order() {
+    this.setState({
+      orderCount: this.state.orderCount + 1,
+    })
+  }
+
   render() {
-    return <div className="product">{this.state.name}</div>
+    return (
+      <div className="product">
+        <span className="name">{this.state.myName}</span>
+        <span className="ordered">{this.state.orderCount}</span>
+        <button className="order" onClick={this.order.bind(this)}>
+          Order
+        </button>
+      </div>
+    )
   }
 }
 
@@ -28,7 +43,6 @@ class ProductsContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('fetching products')
     // for now use promises
     return getProducts().then(products => {
       this.setState({

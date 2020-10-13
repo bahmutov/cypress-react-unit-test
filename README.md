@@ -2,7 +2,7 @@
 
 > A little helper to unit test React components in the open source [Cypress.io](https://www.cypress.io/) E2E test runner **v4.5.0+**
 
-**Jump to:** [Comparison](#comparison), [Blog posts](#blog-posts), [Install](#install), Examples: [basic](#basic-examples), [advanced](#advanced-examples), [full](#full-examples), [external](#external-examples), [Style options](#options), [Code coverage](#code-coverage), [Visual testing](#visual-testing), [Common problems](#common-problems), [Chat](#chat)
+**Jump to:** [Comparison](#comparison), [Blog posts](#blog-posts), [Presentations](#presentations), [Install](#install), Examples: [basic](#basic-examples), [advanced](#advanced-examples), [full](#full-examples), [external](#external-examples), [Mocking](#mocking), [Style options](#options), [Code coverage](#code-coverage), [Visual testing](#visual-testing), [Common problems](#common-problems), [Chat](#chat)
 
 ## Survey
 
@@ -26,7 +26,7 @@ Feature | Jest / Enzyme / RTL | Cypress + `cypress-react-unit-test`
 Test runs in real browser | ❌ | ✅
 Supports shallow mount | ✅ | ❌
 Supports full mount | ✅ | ✅
-Test speed | 🏎 | as fast as the app works in the browser
+Test speed | 🏎 | [as fast as the app works in the browser](#fast-enough)
 Test can use additional plugins | maybe | use any [Cypress plugin](https://on.cypress.io/plugins)
 Test can interact with component | synthetic limited API | use any [Cypress command](https://on.cypress.io/api)
 Test can be debugged | via terminal and Node debugger | use browser DevTools
@@ -35,11 +35,15 @@ Re-run tests on file or test change | ✅ | ✅
 Test output on CI | terminal | terminal, screenshots, videos
 Tests can be run in parallel | ✅ | ✅ via [parallelization](https://on.cypress.io/parallelization)
 Test against interface | if using `@testing-library/react` | ✅ and can use `@testing-library/cypress`
-Spying and stubbing methods | Jest mocks | Sinon library
+Spying and stubbing methods | Jest mocks | [Sinon library](https://on.cypress.io/stubs-spies-and-clocks)
 Stubbing imports | ✅ | ✅
 Stubbing clock | ✅ | ✅
 Code coverage | ✅ | ✅
 <!-- prettier-ignore-end -->
+
+If you are coming from Jest + RTL world, read [Test The Interface Not The Implementation](https://glebbahmutov.com/blog/test-the-interface/).
+
+If you are coming from Enzyme world, check out the [enzyme](cypress/component/basic/enzyme) example.
 
 ## Blog posts
 
@@ -52,6 +56,16 @@ Code coverage | ✅ | ✅
 - [12 Recipes for testing React applications using cypress-react-unit-test](https://dev.to/bahmutov/12-recipes-for-testing-react-applications-using-cypress-react-unit-test-46g6) (compare to [12 Recipes for testing React applications using Testing Library](https://dev.to/jooforja/12-recipes-for-testing-react-applications-using-testing-library-1bh2#portal))
 - [Cypress Unit Testing React Components With TypeScript](https://medium.com/swlh/cypress-unit-testing-react-components-with-typescript-77b38e5043b3)
 - [Test The Interface Not The Implementation](https://glebbahmutov.com/blog/test-the-interface/) compares Jest + React Testing Library to cypress-react-unit-test + Cypress Testing Library
+- [Components People Test](https://glebbahmutov.com/blog/components-people-test/) about testing a component inside a Next.js-powered blog
+
+## Presentations
+
+It is better to see something once than to hear about a thousand times. Watch one of the talks below to see this library in action.
+
+- Webinar "Component Testing with Cypress and Applitools" [video](https://www.youtube.com/watch?v=Bxh_ebMk1aM), [slides](https://cypress.slides.com/cypress-io/component-testing-with-cypress-and-applitools)
+- Conference talk "Я вижу что происходит: визуальное тестирование компонентов; I see what is going on" [video with Russian narration](https://youtu.be/3Z-doNgoJFI), [slides in English](https://slides.com/bahmutov/qafest-2020)
+- Conference talk "I See What is Going On" from JSNation [video](https://www.youtube.com/watch?v=00BNExlJUU8), [slides](https://slides.com/bahmutov/i-see-what-is-going-on)
+- Conference talk "Fast and Effective ... End-to-end Tests?" from JSVidCon [video](https://youtu.be/CiqVTgEZfiw), [slides](https://slides.com/bahmutov/fast-and-effective-end-to-end-tests)
 
 ## Known problems
 
@@ -64,6 +78,16 @@ Requires [Node](https://nodejs.org/en/) version 8 or above.
 ```sh
 npm install --save-dev cypress cypress-react-unit-test
 ```
+
+## Init
+
+You can use our command line wizard to give you instructions on configuring this plugin. It will try to determine which framework or bundling tool you are using and give you instructions on right configuration.
+
+```sh
+cypress-react-unit-test init
+```
+
+Or continue with manual installation:
 
 1. Include this plugin from your project's `cypress/support/index.js`
 
@@ -97,6 +121,7 @@ See [Recipes](./docs/recipes.md) for more examples.
 ## API
 
 - `mount` is the most important function, allows to mount a given React component as a mini web application and interact with it using Cypress commands
+- `createMount` factory function that creates new `mount` function with default options
 - `unmount` removes previously mounted component, mostly useful to test how the component cleans up after itself
 - `mountHook` mounts a given React Hook in a test component for full testing, see `hooks` example
 
@@ -124,16 +149,22 @@ Spec | Description
 --- | ---
 [alias](cypress/component/basic/alias) | Retrieve mounted component by its name or alias
 [alert-spec.js](cypress/component/basic/alert-spec.js) | Component tries to use `window.alert`
+[before-hook](cypress/component/basic/before-hook) | Mount the component from `before` hook to run multiple tests against it
 [counter-set-state](cypress/component/basic/counter-set-state) | Counter component that uses `this.state`
 [counter-use-hooks](cypress/component/basic/counter-use-hooks) | Counter component that uses `useState` hook
+[document-spec](cypress/component/basic/document) | Checks `document` dimensions from the component
+[enzyme](cypress/component/basic/enzyme) | Several specs showing how to recreate Enzyme's `setProps`, `setState`, and `setContext` methods.
 [emotion-spec.js](cypress/component/basic/emotion-spec.js) | Confirms the component is using `@emotion/core` and styles are set
 [error-boundary-spec.js](cypress/component/basic/error-boundary-spec.js) | Checks if an error boundary component works
+[fails-correctly](cypress/component/basic/fails-correctly) | Cypress test fails correctly when interacting with disabled elements
 [pure-component-spec.js](cypress/component/basic/pure-component.spec.js) | Tests stateless component
 [stateless-spec.js](cypress/component/basic/stateless-spec.js) | Passes Cypress stub to the component, confirms the component calls it on click
 [window-spec.js](cypress/component/basic/window-spec.js) | In the component test, the spec `window` and the application's `window` where the component is running should be the same object
 [css](cypress/component/basic/css) | Shows that component with `import './Button.css'` works
+[css modules](cypress/component/basic/css-modules) | Shows that component that using css modules styles works
 [network](cypress/component/basic/network) | Confirms we can use `cy.route` to stub / spy on component's network calls
 [no-visit](cypress/component/basic/no-visit) | Component specs cannot call `cy.visit`
+[re-render](cypress/component/basic/re-render) | Checking how the component re-renders when its props change
 [react-book-by-chris-noring](cypress/component/basic/react-book-by-chris-noring) | Copied test examples from [React Book](https://softchris.github.io/books/react) and adapted for Cypress component tests
 [react-tutorial](cypress/component/basic/react-tutorial) | Tests from official [ReactJS tutorial](https://reactjs.org/tutorial/tutorial.html) copied and adapted for Cypress component tests
 [stub-example](cypress/component/basic/stub-example) | Uses `cy.stub` as component props
@@ -142,7 +173,6 @@ Spec | Description
 [typescript](cypress/component/basic/typescript) | A spec written in TypeScript
 [unmount](cypress/component/basic/unmount) | Verifies the component's behavior when it is unmounted from the DOM
 [use-lodash-fp](cypress/component/basic/use-lodash-fp) | Imports and tests methods from `lodash/fp` dependency
-[document-spec](cypress/component/basic/document) | Checks `document` dimensions from the component
 [styled-components](cypress/component/basic/styled-components) | Test components that use [styled-components](https://www.styled-components.com/)
 <!-- prettier-ignore-end -->
 
@@ -161,11 +191,13 @@ Spec | Description
 [hooks](cypress/component/advanced/hooks) | Tests several components that use React Hooks like `useState`, `useCallback`
 [lazy-loaded](cypress/component/advanced/lazy-loaded) | Confirms components that use `React.lazy` and dynamic imports work
 [material-ui-example](cypress/component/advanced/material-ui-example) | Large components demos from [Material UI](https://material-ui.com/)
+[mobx-v6](cypress/component/advanced/mobx-v6) | Test components with MobX v6 observable
 [mock-fetch](cypress/component/advanced/mock-fetch) | Test stubs `window.fetch` used by component in `useEffect` hook
 [mocking-axios](cypress/component/advanced/mocking-axios) | Stubbing methods from a 3rd party component like `axios`
 [mocking-component](cypress/component/advanced/mocking-component) | Replaced a child component with dummy component during test
 [mocking-imports](cypress/component/advanced/mocking-imports) | Stub a named ES6 import in various situations
-[react-router-v6](cypress/component/advanced/react-router-v6) | Example testing a [React Router v6](https://github.com/ReactTraining/react-router)
+[path-aliases](cypress/component/advanced/path-aliases) | Specs import components using path aliases defined in the Webpack config
+[react-router-v6](cypress/component/advanced/react-router-v6) | Example testing a [React Router v6](https://github.com/ReactTraining/react-router). Both browser and in memory routers
 [renderless](cypress/component/advanced/renderless) | Testing a component that does not need to render itself into the DOM
 [set-timeout-example](cypress/component/advanced/set-timeout-example) | Control the clock with `cy.tick` and test loading components that use `setTimeout`
 [test-retries](cypress/component/advanced/test-retries) | This component is compatible with [Cypress Test Retries](https://github.com/cypress-io/cypress/pull/3968)
@@ -174,8 +206,13 @@ Spec | Description
 [tutorial](cypress/component/advanced/tutorial) | A few tests adopted from [ReactJS Tutorial](https://reactjs.org/tutorial/tutorial.html), including Tic-Tac-Toe game
 [use-local-storage](cypress/component/advanced/use-local-storage) | Use hooks to load and save items into `localStorage`
 [portal](cypress/component/advanced/portal) | Component test for `ReactDOM.createPortal` feature
+[radioactive-state](cypress/component/advanced/radioactive-state) | Testing components that use [radioactive-state](https://github.com/MananTank/radioactive-state) library
 [react-bootstrap](cypress/component/advanced/react-bootstrap) | Confirms [react-bootstrap](https://react-bootstrap.github.io/) components are working
 [select React component](cypress/component/advanced/react-book-example/src/components/ProductsList.spec.js) | Uses [cypress-react-selector](https://github.com/abhinaba-ghosh/cypress-react-selector) to find DOM elements using React component name and state values
+[lazy-loaded](cypress/component/advanced/lazy-loaded-suspense) | Uses multiple chunks and async components with `React.lazy` + `React.Suspense`.
+[i18n](cypress/component/advanced/i18n) | Uses[react-i18next](https://react.i18next.com/) for localizaiton.
+[framer-motion](cypress/component/advanced/framer-motion) | Uses [framer motion](https://www.framer.com/motion/) for javascript-based animation.
+[window-env](cypress/component/advanced/window-env) | Set additional properties on the `window` object during test
 <!-- prettier-ignore-end -->
 
 ### Full examples
@@ -196,6 +233,7 @@ Folder Name | Description
 [visual-testing-with-happo](examples/visual-testing-with-happo) | [Visual testing](#visual-testing) for components using 3rd party service [Happo](https://happo.io/)
 [visual-testing-with-applitools](examples/visual-testing-with-applitools) | [Visual testing](#visual-testing) for components using 3rd party service [Applitools.com](https://applitools.com/)
 [using-babel](examples/using-babel) | Bundling specs and loaded source files using project's existing `.babelrc` file
+[rollup](examples/rollup) | Bundle component and specs using [rollup](http://rollupjs.org/guide/en/).
 [webpack-file](examples/webpack-file) | Load existing `webpack.config.js` file
 [webpack-options](examples/webpack-options) | Using the default Webpack options from `@cypress/webpack-preprocessor` to transpile JSX specs
 <!-- prettier-ignore-end -->
@@ -236,6 +274,15 @@ Repo | Description
 <!-- prettier-ignore-end -->
 
 To find more examples, see GitHub topic [cypress-react-unit-test-example](https://github.com/topics/cypress-react-unit-test-example)
+
+## Mocking
+
+Using Cypress + cypress-react-unit-test your tests can mock everything:
+
+- method calls via [cy.stub](https://on.cypress.io/stub), see example [mock-fetch](cypress/component/advanced/mock-fetch). Works for both your application code and for [browser API methods](https://glebbahmutov.com/blog/stub-navigator-api/)
+- network calls via [cy.route](https://on.cypress.io/route) and [cy.route2](https://on.cypress.io/route2)
+- ES6 imports, see [mocking-imports](cypress/component/advanced/mocking-imports) and [mocking-component](cypress/component/advanced/mocking-component)
+- clock and timers using [cy.clock](https://on.cypress.io/clock), see [set-timeout-example](cypress/component/advanced/set-timeout-example) and [react-query-example](https://github.com/bahmutov/react-query-example)
 
 ## Options
 
@@ -319,6 +366,41 @@ Find full example in [sass-and-ts](examples/sass-and-ts) folder.
 
 </details>
 
+<details id="fast-enough">
+  <summary>Slower than Jest</summary>
+
+When you use `cypress-X-unit-test` for component testing, you might notice the tests are slower than using Jest to test the same components. Yes, that's true. A test runner could be made _extremely_ fast if it did nothing, just check out the [auchenberg/volkswagen](https://github.com/auchenberg/volkswagen) test runner - it is blazing on CI 😉. Of course, Jest does do things, just not inside the real browser environment.
+
+Testing using Jest with its jsdom browser is faster than starting the real browser, loading all libraries, mounting the component and then waiting for the component to actually perform its work in response to the test's actions. But do those tests give you a true confidence that the component is working?
+
+Try this test 🙈
+
+Spoiler: it fails, [proof](https://codesandbox.io/s/react-testing-library-demo-forked-z7l2o?file=/src/__tests__/components.js).
+
+```js
+const mock = jest.fn()
+// render a component that does NOT allow any click events
+// using pointerEvents: "none" style
+const { getByRole } = render(
+  <button style={{ pointerEvents: 'none' }} onClick={mock}>
+    text
+  </button>,
+)
+// Jest happily clicks
+fireEvent.click(getByRole('button'))
+expect(mock).not.toBeCalled()
+```
+
+Cypress test on the other hand [fails correctly](cypress/component/basic/fails-correctly).
+
+We think that using `cypress-X-unit-test` runs tests as _fast as your application code is_, and often you need to think how to _slow down_ the Cypress Test Runner so it does not run away from the component's code, just see our blog posts dealing with [test flake](https://cypress.io/blog/tag/flake/).
+
+From the developer's perspective I would ask myself: which tests do I _write faster_? What happens when a test fails and I need to debug the failure: which test runner allows me to _debug a failed test quicker_? While I am partial, I have to say, realistic Cypress tests are easier to write and debug.
+
+Finally, when running tests on the continuous integration service, the true test speed up comes from properly configuring [dependencies caching](https://on.cypress.io/caching) and running [tests in parallel](https://on.cypress.io/parallelization) - something we have extensively documented and consider a solved problem.
+
+</details>
+
 <details id="speed">
   <summary>Slow bundling</summary>
 
@@ -343,13 +425,6 @@ See related issue [#141](https://github.com/bahmutov/cypress-react-unit-test/iss
 
 </details>
 
-<details id="next-not-supported">
-  <summary>Next.js projects not supported</summary>
-
-Currently, this project cannot find Webpack settings used by Next.js, thus it cannot bundle specs and application code correctly. Keep an eye on [#155](https://github.com/bahmutov/cypress-react-unit-test/issues/155)
-
-</details>
-
 <details id="gatsby-not-supported">
   <summary>Gatsby.js projects not supported</summary>
 
@@ -357,9 +432,13 @@ Currently, this project cannot find Webpack settings used by Gatsby.js, thus it 
 
 </details>
 
+## Context Provider usage
+
+React context provider usage and API described in [./docs/providers-and-composition.md](./docs/providers-and-composition.md)
+
 ## Chat
 
-We have a chat workspace at [https://component-testing.slack.com/](https://component-testing.slack.com/), you are welcome to [join us](https://join.slack.com/t/component-testing/shared_invite/zt-g4k6sget-oj2wlswjNTb38s0n7kql1A).
+We have a chat workspace at [https://component-testing.slack.com/](https://component-testing.slack.com/), you are welcome to [join us](https://join.slack.com/t/component-testing/shared_invite/zt-h93lrgsl-8WzE8yNQlcZuZji_gA_mtg).
 
 ## Development
 
@@ -377,6 +456,12 @@ Because finding and modifying Webpack settings while running this plugin is done
 
 ```
 DEBUG=cypress-react-unit-test,find-webpack
+```
+
+Since some objects might be deeply nested, if you see an object that is printed simply `{ module: { rules: [ [Object] ] }` you can increase the max printed depth
+
+```
+DEBUG=cypress-react-unit-test,find-webpack DEBUG_DEPTH=10
 ```
 
 ## Migration guide
