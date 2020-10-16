@@ -14,6 +14,7 @@
     "cypress-react-unit-test": "file:../..",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "cypress-plugin-snapshots": "1.4.4"
   }
 }
