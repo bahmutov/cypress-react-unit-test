@@ -8,7 +8,6 @@
   "scripts": {
     "test": "cypress run",
     "test:unit": "jest --runInBand",
-    "percy:test": "percy exec -- cypress run",
     "build": "npm run transpile && npm run transpile:bin && chmod +x bin/init.js",
     "cy:open": "cypress open",
     "transpile": "tsc",
@@ -70,7 +69,6 @@
     "@material-ui/pickers": "3.2.10",
     "@mdx-js/loader": "^1.6.16",
     "@next/mdx": "^9.5.3",
-    "@percy/cypress": "2.3.2",
     "@testing-library/cypress": "7.0.1",
     "@types/chalk": "2.2.0",
     "@types/inquirer": "7.3.1",
