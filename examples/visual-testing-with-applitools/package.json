@@ -3,7 +3,7 @@
   "description": "Visual diffing for component testing using Applittols",
   "private": true,
   "scripts": {
-    "test": "cypress-expect run --passing 1",
+    "test": "cypress-expect run --passing 2",
     "cy:open": "cypress open"
   },
   "devDependencies": {
