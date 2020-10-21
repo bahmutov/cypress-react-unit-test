@@ -15,6 +15,7 @@
     "react-scripts": "3.4.1",
     "react": "^16.13.1",
     "happo-cypress": "1.9.2",
-    "happo.io": "5.6.1"
+    "happo.io": "5.6.1",
+    "react-calendar-heatmap": "1.8.1"
   }
 }
