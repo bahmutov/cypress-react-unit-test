@@ -13,7 +13,8 @@
     "@percy/cypress": "2.3.2",
     "cypress": "5.3.0",
     "cypress-expect": "2.1.2",
-    "cypress-react-unit-test": "file:../../cypress-react-unit-test-0.0.0-development.tgz",
+    "cypress-react-unit-test": "file:../..",
+    "date-fns": "2.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
