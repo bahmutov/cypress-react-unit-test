@@ -18,8 +18,9 @@
     "cypress-react-unit-test": "file:../..",
     "debug": "4.2.0",
     "react": "^16.13.1",
+    "react-app-rewired": "2.1.6",
     "react-dom": "^16.13.1",
-    "react-app-rewired": "2.1.6"
+    "webpack": "5.2.0"
   },
   "browserslist": {
     "production": [
