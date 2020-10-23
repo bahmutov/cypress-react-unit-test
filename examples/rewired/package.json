@@ -17,9 +17,9 @@
     "cypress-expect": "2.1.2",
     "cypress-react-unit-test": "file:../..",
     "debug": "4.2.0",
-    "react": "17.0.1",
-    "react-app-rewired": "2.1.6",
-    "react-dom": "17.0.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-app-rewired": "2.1.6"
   },
   "browserslist": {
     "production": [
