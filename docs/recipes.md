@@ -79,7 +79,7 @@ module.exports = (on, config) => {
 }
 ```
 
-See example in the folder [examples/using-babel](examples/using-babel) and [examples/using-babel-typescript](examples/using-babel-typescript).
+See example in the folder [../examples/using-babel](examples/using-babel) and [../examples/using-babel-typescript](examples/using-babel-typescript).
 
 ### Add Babel plugins
 
